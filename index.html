@@ -504,18 +504,18 @@ function normalizeWordForAudio(text) {
 }
 
 function playAudio(textToNormalize) {
+    // 1. Usa a função que você já ajustou (que mantém as maiúsculas e tira o apóstrofo)
     const normalizedName = normalizeWordForAudio(textToNormalize);
     
-    // ⚠️ ATENÇÃO: Verifique se seus áudios estão na pasta 'audio/'
-    // const audioPath = `audio/${normalizedName}.mp3`;
-    // No Alfabeto, troque a linha do audioPath por esta:
-const audioPath = 'audio/' + word.toLowerCase().trim().replace(/\s+/g, '_').replace(/[?'!.,;]/g, '') + '.mp3';
-	
+    // 2. Monta o caminho usando o nome CORRETO (sem forçar toLowerCase aqui!)
+    const audioPath = `audio/${normalizedName}.mp3`;
+    
     const audio = new Audio(audioPath);
+    
     audio.play().catch(error => {
         console.error("Erro ao tentar tocar o áudio de: " + textToNormalize, error);
-        // Mensagem de erro amigável para o usuário, caso o áudio não exista
-        alert(`Áudio não encontrado! Verifique se o arquivo:\n"${normalizedName}.mp3"\n...existe na sua pasta "audio/".`);
+        // O alert abaixo é fundamental para você ver o que o código está buscando de verdade
+        alert(`Áudio não encontrado!\nO sistema buscou por: "${normalizedName}.mp3"\n\nVerifique se no GitHub o arquivo está EXATAMENTE com esse nome.`);
     });
 }
 
