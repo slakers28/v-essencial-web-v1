@@ -492,10 +492,13 @@ function normalizeWordForAudio(text) {
     normalized = normalized.replace(/[.,;?!]/g, ''); 
     
     // 5. Converte para minúsculas para garantir a correspondência com o nome do arquivo
-    normalized = normalized.toLowerCase();
-	
+    //normalized = normalized.toLowerCase();
+		
 	// ADICIONE/MANTENHA ASSIM:
-    normalized = normalized.toLowerCase().replace(/[']/g, ''); // Remove o apóstrofo que faltava
+    //normalized = normalized.toLowerCase().replace(/[']/g, ''); // Remove o apóstrofo que faltava
+	
+	// Remove o apóstrofo e mantém as letras como estão (Maiúsculas ou Minúsculas)
+    normalized = normalized.replace(/[']/g, '');
 
     return normalized;
 }
