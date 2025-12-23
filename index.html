@@ -493,6 +493,9 @@ function normalizeWordForAudio(text) {
     
     // 5. Converte para minúsculas para garantir a correspondência com o nome do arquivo
     normalized = normalized.toLowerCase();
+	
+	// ADICIONE/MANTENHA ASSIM:
+    normalized = normalized.toLowerCase().replace(/[']/g, ''); // Remove o apóstrofo que faltava
 
     return normalized;
 }
@@ -501,8 +504,10 @@ function playAudio(textToNormalize) {
     const normalizedName = normalizeWordForAudio(textToNormalize);
     
     // ⚠️ ATENÇÃO: Verifique se seus áudios estão na pasta 'audio/'
-    const audioPath = `audio/${normalizedName}.mp3`;
-    
+    // const audioPath = `audio/${normalizedName}.mp3`;
+    // No Alfabeto, troque a linha do audioPath por esta:
+const audioPath = 'audio/' + word.toLowerCase().trim().replace(/\s+/g, '_').replace(/[?'!.,;]/g, '') + '.mp3';
+	
     const audio = new Audio(audioPath);
     audio.play().catch(error => {
         console.error("Erro ao tentar tocar o áudio de: " + textToNormalize, error);
