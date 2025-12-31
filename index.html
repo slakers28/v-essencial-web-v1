@@ -572,15 +572,14 @@ function normalizeWordForAudio(text) {
 
 function playAudio(textToNormalize) {
     const normalizedName = normalizeWordForAudio(textToNormalize);
-    
-    // ⚠️ ATENÇÃO: Verifique se seus áudios estão na pasta 'audio/'
     const audioPath = `audio/${normalizedName}.mp3`;
     
     const audio = new Audio(audioPath);
+    // VELOCIDADE BEM LENTA: 0.5
+    audio.playbackRate = 0.5; 
+    
     audio.play().catch(error => {
         console.error("Erro ao tentar tocar o áudio de: " + textToNormalize, error);
-        // Mensagem de erro amigável para o usuário, caso o áudio não exista
-        alert(`Áudio não encontrado! Verifique se o arquivo:\n"${normalizedName}.mp3"\n...existe na sua pasta "audio/".`);
     });
 }
 
@@ -594,13 +593,20 @@ function playAudio(textToNormalize) {
 	
         // ============== CÓDIGO DE ÁUDIO ==============
         function playAudio(word) {
-            const audioPath = 'audio/' + word.toLowerCase().replace(/\s/g, '_').replace(/'/g, '') + '.mp3';
-            const audio = new Audio(audioPath);
-            audio.play().catch(error => {
-                console.error(`Erro ao reproduzir o áudio para '${word}':`, error);
-                alert(`Erro: Não foi possível carregar o arquivo de áudio para "${word}". Verifique se o arquivo ${audioPath} existe.`);
-            });
-        }
+    const audioPath = 'audio/' + word.toLowerCase().replace(/\s/g, '_').replace(/'/g, '') + '.mp3';
+    const audio = new Audio(audioPath);
+
+    // Técnica para garantir que a velocidade seja aplicada
+    audio.onplay = () => {
+        audio.playbackRate = 0.5; // Teste com 0.5 para sentir a diferença real
+    };
+
+    audio.play().catch(error => {
+        console.error(`Erro ao reproduzir o áudio para '${word}':`, error);
+        // Removi o alert para não atrapalhar a experiência do usuário, 
+        // mas mantive o erro no console para você conferir.
+    });
+}
         // ==================================================
 
         // Função para gerar os cards - AGORA CORRIGIDA COM LAYOUT UNIFICADO
@@ -3882,6 +3888,8 @@ function virarCarta(elemento, id, audioPath) {
 
     if (audioPath) {
         const audio = new Audio(audioPath);
+        // VELOCIDADE BEM LENTA: 0.5 (50% mais lento que o normal)
+        audio.playbackRate = 0.5; 
         audio.play().catch(error => console.error("Erro áudio:", audioPath));
     }
 
@@ -3890,7 +3898,7 @@ function virarCarta(elemento, id, audioPath) {
 
     if (cartasViradas.length === 2) {
         podeClicar = false;
-        // Aumentamos aqui para 2000 (2 segundos) para dar tempo de ler a segunda carta
+        // Mantido 2 segundos para dar tempo de ouvir o áudio lento e ler
         setTimeout(verificarPar, 2000); 
     }
 }
