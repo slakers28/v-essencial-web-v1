@@ -180,27 +180,27 @@
         <div class="flex items-center space-x-3">
             
             <button id="pomodoroBtnFixed" onclick="togglePomodoroUI()"
-    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    
-    <span>Pomodoro</span>
-</button>
-			
-			
-			<button id="gameBtn" onclick="abrirMenuJogo()" 
-    class="hidden bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
-    <span>🎮</span>
-    <span>Jogo</span>
-</button>
+                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Pomodoro</span>
+            </button>
+            
+            <button id="gameBtn" onclick="abrirMenuJogo()" 
+                class="hidden bg-[#FFFF10] hover:bg-[#F2F210] text-black font-bold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
+                <span>🎮</span> <span>Memória</span>
+            </button>
+
+            <a href="demos.html" id="historyBtn" 
+    class="hidden bg-[#007BFF] hover:bg-[#0069d9] text-white font-bold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5 border-b-2 border-blue-800">
+    <span>📖</span> <span>Histórias</span>
+</a>
             
             <button id="backToCategoriesBtn" onclick="hideCategory()" 
-    class="hidden bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
-    <span>←</span>
-    <span>Categorias</span>
-</button>
+                class="hidden bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded-md text-xs transition duration-150 shadow-sm flex items-center gap-1.5">
+                <span>←</span> <span>Categorias</span>
+            </button>
             
             <button id="scrollToTopBtn" onclick="scrollToTop()" 
                 class="hidden bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1 px-2 rounded-full text-xs transition duration-150 shadow-sm">
@@ -226,11 +226,46 @@
 </header>
 
 
-<div id="pomodoro-toggle-btn" class="fixed bottom-4 right-4 z-50 bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600 transition duration-300 cursor-pointer" onclick="togglePomodoroUI()">
+<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-3 items-center">
+
+
+    
+<div id="categoryNavigation" class="fixed bottom-6 left-6 hidden flex-col gap-2 z-40">
+    <button onclick="navigateCategory('next')" 
+        class="bg-white/80 backdrop-blur-sm hover:bg-white text-blue-600 rounded-full shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center border border-white/50" 
+        style="width: 35px; height: 35px;" title="Próxima Categoria">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+            <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.94 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" transform="rotate(90 12 12)" clip-rule="evenodd" />
+        </svg>
+    </button>
+    
+    <button onclick="navigateCategory('prev')" 
+        class="bg-white/80 backdrop-blur-sm hover:bg-white text-blue-600 rounded-full shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center border border-white/50" 
+        style="width: 35px; height: 35px;" title="Categoria Anterior">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+            <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.94 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" transform="rotate(-90 12 12)" clip-rule="evenodd" />
+        </svg>
+    </button>
+</div>
+    
+    <button id="backToTopBtn" onclick="scrollToTop()" 
+        class="bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center" 
+        style="display: none; width: 35px; height: 35px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
+        </svg>
+    </button>
+
+    <div id="pomodoro-toggle-btn" 
+        class="bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg transition duration-300 cursor-pointer flex items-center justify-center" 
+        style="width: 35px; height: 35px;"
+        onclick="togglePomodoroUI()">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
     </div>
+
+</div>
 
     <div id="pomodoro-container" class="fixed top-4 left-4 z-50 rounded-lg p-2 shadow-lg border border-red-200 bg-gradient-to-r from-red-100 to-pink-100 hidden">
         <div class="flex justify-between items-start mb-3">
@@ -347,7 +382,7 @@
             
             
             <button 
-                onclick="showCategory('education')" 
+                onclick="showSpecificCategory('education')" 
                 class="bg-gradient-to-r from-blue-100 to-white hover:from-blue-200 hover:to-gray-100 text-center py-6 px-4 rounded-xl transition-all duration-300 border-2 border-blue-300 hover:border-blue-400 transform hover:scale-105"
             >
                 <div class="text-3xl mb-2">📚</div>
@@ -464,7 +499,7 @@
 
 
             <button 
-                onclick="showCategory('time')" 
+                onclick="showSpecificCategory('time')" 
                 class="bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 text-center py-6 px-4 rounded-xl transition-all duration-300 border-2 border-blue-300 hover:border-blue-400 transform hover:scale-105"
             >
                 <div class="text-3xl mb-2">⏰</div>
@@ -473,7 +508,7 @@
             </button>
 
             <button 
-                onclick="showCategory('religion')" 
+                onclick="showSpecificCategory('religion')" 
                 class="bg-gradient-to-r from-blue-100 to-white hover:from-blue-200 hover:to-gray-100 text-center py-6 px-4 rounded-xl transition-all duration-300 border-2 border-blue-300 hover:border-blue-400 transform hover:scale-105"
             >
                 <div class="text-3xl mb-2">🙏</div>
@@ -510,8 +545,8 @@
             <div class="text-center mb-8">
                 <h2 id="categoryTitle" class="text-3xl font-bold text-gray-800 mb-2"></h2>
                 <p id="categoryDescription" class="text-gray-600"></p>
-                <button onclick="hideCategory()" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors">
-                    ← Voltar às Categorias
+                <button onclick="hideCategory()" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white px-6 py-1 rounded-lg transition-colors">
+                    ← Categorias
                 </button>
             </div>
             
@@ -526,6 +561,7 @@
 // FUNÇÕES DE ÁUDIO
 // =================================================================
 
+let currentVocabAudio = null; // Âncora global para o áudio
 
 // Função para rolar a tela suavemente para o topo
 function scrollToTop() {
@@ -570,15 +606,22 @@ function normalizeWordForAudio(text) {
     return normalized;
 }
 
+// Função 1: Versão com normalização complexa
 function playAudio(textToNormalize) {
+    // Para o som anterior antes de começar o novo
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
+
     const normalizedName = normalizeWordForAudio(textToNormalize);
     const audioPath = `audio/${normalizedName}.mp3`;
     
-    const audio = new Audio(audioPath);
-    // VELOCIDADE BEM LENTA: 0.9
-    audio.playbackRate = 0.9; 
+    // Registra o áudio na variável global window
+    window.currentVocabAudio = new Audio(audioPath);
+    window.currentVocabAudio.playbackRate = 0.9; 
     
-    audio.play().catch(error => {
+    window.currentVocabAudio.play().catch(error => {
         console.error("Erro ao tentar tocar o áudio de: " + textToNormalize, error);
     });
 }
@@ -592,19 +635,25 @@ function playAudio(textToNormalize) {
 	
 	
         // ============== CÓDIGO DE ÁUDIO ==============
-        function playAudio(word) {
-    const audioPath = 'audio/' + word.toLowerCase().replace(/\s/g, '_').replace(/'/g, '') + '.mp3';
-    const audio = new Audio(audioPath);
+        // Função 2: Versão padrão de áudio
+function playAudio(word) {
+    // Para o som anterior antes de começar o novo
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
 
-    // Técnica para garantir que a velocidade seja aplicada
-    audio.onplay = () => {
-        audio.playbackRate = 0.9; // Teste com 0.9 para sentir a diferença real
+    const audioPath = 'audio/' + word.toLowerCase().replace(/\s/g, '_').replace(/'/g, '') + '.mp3';
+    
+    // Registra o áudio na variável global window
+    window.currentVocabAudio = new Audio(audioPath);
+
+    window.currentVocabAudio.onplay = () => {
+        window.currentVocabAudio.playbackRate = 0.9;
     };
 
-    audio.play().catch(error => {
+    window.currentVocabAudio.play().catch(error => {
         console.error(`Erro ao reproduzir o áudio para '${word}':`, error);
-        // Removi o alert para não atrapalhar a experiência do usuário, 
-        // mas mantive o erro no console para você conferir.
     });
 }
         // ==================================================
@@ -729,120 +778,6 @@ if (!isAlphabet) {
             document.getElementById('categorySection').scrollIntoView({ behavior: 'smooth' });
         }
         
-		// ============== LÓGICA DO POMODORO (PRESERVADA) ==============
-        let timer;
-        let isRunning = false;
-        let isFocus = true;
-        let timeLeft = 25 * 60; // 25 minutos em segundos (Padrão)
-        const focusTime = 25 * 60;
-        const shortBreakTime = 5 * 60;
-        const longBreakTime = 15 * 60; // Não usado no momento, mas boa prática
-        let cycles = 0; // Contador de ciclos de foco completados
-
-        function formatTime(seconds) {
-            const min = String(Math.floor(seconds / 60)).padStart(2, '0');
-            const sec = String(seconds % 60).padStart(2, '0');
-            return `${min}:${sec}`;
-        }
-
-        function updateDisplay() {
-            document.getElementById('pomodoro-time').textContent = formatTime(timeLeft);
-            
-            const title = document.getElementById('pomodoro-title');
-            const status = document.getElementById('pomodoro-status');
-            const startPauseBtn = document.getElementById('start-pause-btn');
-
-            if (isFocus) {
-                title.textContent = `Foco (${formatTime(focusTime)})`;
-                status.textContent = isRunning ? "Foco em andamento... 🧠" : "Pronto para começar a estudar!";
-                startPauseBtn.innerHTML = isRunning ? "⏸️ Pausar Foco" : "▶️ Iniciar Foco";
-            } else {
-                title.textContent = `Pausa (${formatTime(timeLeft)})`;
-                status.textContent = isRunning ? "Pausa em andamento... ☕" : "Aguardando início da pausa!";
-                startPauseBtn.innerHTML = isRunning ? "⏸️ Pausar Pausa" : "▶️ Iniciar Pausa";
-            }
-        }
-        
-        function setFocusTime(startImmediately = false) {
-            isFocus = true;
-            timeLeft = focusTime;
-            clearInterval(timer);
-            isRunning = false;
-            updateDisplay();
-            if (startImmediately) {
-                startPausePomodoro();
-            }
-        }
-
-        function setShortBreak(startImmediately = false) {
-            isFocus = false;
-            timeLeft = shortBreakTime;
-            clearInterval(timer);
-            isRunning = false;
-            updateDisplay();
-            if (startImmediately) {
-                startPausePomodoro();
-            }
-        }
-
-        function startTimer() {
-            timer = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateDisplay();
-                } else {
-                    clearInterval(timer);
-                    isRunning = false;
-                    
-                    if (isFocus) {
-                        alert("Foco terminado! Hora da pausa curta. ☕");
-                        setShortBreak(true); // Inicia a pausa curta automaticamente
-                    } else {
-                        alert("Pausa terminada! Hora de voltar ao foco. 🧠");
-                        setFocusTime(true); // Volta ao foco automaticamente
-                    }
-                }
-            }, 1000);
-        }
-
-        function startPausePomodoro() {
-            if (isRunning) {
-                clearInterval(timer);
-                isRunning = false;
-            } else {
-                isRunning = true;
-                startTimer();
-            }
-            updateDisplay();
-        }
-
-        function resetPomodoro() {
-            clearInterval(timer);
-            isRunning = false;
-            setFocusTime();
-        }
-
-        function togglePomodoroUI() {
-            const container = document.getElementById('pomodoro-container');
-            const toggleBtn = document.getElementById('pomodoro-toggle-btn');
-            
-            if (container.classList.contains('hidden')) {
-                container.classList.remove('hidden');
-                toggleBtn.classList.add('hidden'); // Oculta o botão quando o container está aberto
-                updateDisplay(); // Garante que o display esteja atualizado ao abrir
-            } else {
-                container.classList.add('hidden');
-                toggleBtn.classList.remove('hidden'); // Mostra o botão quando o container está fechado
-            }
-        }
-
-        // Inicializa o Pomodoro
-        resetPomodoro();
-        // ==================================================
-		
-		
-		
-		
 		
         // Complete word database - USANDO ESTRUTURA COMPLETA
         const categoryData = {
@@ -2116,195 +2051,9 @@ if (!isAlphabet) {
 { word: 'oho', translation: 'oho', icon: '😮', phonetic: 'ôu-rrôu', example: '<strong>Oho</strong>, <strong>what</strong> have we here?', examplePt: 'Oho, o que temos aqui?', categoryType: 'INTERJECTIONS' }
                 ]
             },
-			
-			
-            time: {
-                title: 'TEMPO (TIME)',
-                description: 'Vocabulário essencial sobre horas, dias e momentos',
-                words: [
-                    { word: 'time', translation: 'Tempo/Hora', icon: '⏰', phonetic: 'taíme', example: 'What <strong>time</strong> is <strong>it?</strong>', examplePt: 'Que horas são?', categoryType: 'TIME' },
-{ word: 'hour', translation: 'Hora', icon: '⏳', phonetic: 'áuer', example: 'I need <strong>one</strong> <strong>hour</strong> to finish this.', examplePt: 'Eu preciso de uma hora para terminar isto.', categoryType: 'TIME' },
-{ word: 'minute', translation: 'Minuto', icon: '⏳', phonetic: 'mínit', example: 'I\'ll be <strong>ready</strong> in five <strong>minute</strong>s.', examplePt: 'Eu estarei pronto em cinco minutos.', categoryType: 'TIME' },
-{ word: 'second', translation: 'Segundo', icon: '⏱️', phonetic: 'sécond', example: 'Wait just <strong>one</strong> <strong>second</strong>.', examplePt: 'Espere apenas um segundo.', categoryType: 'TIME' },
-{ word: 'o\'clock', translation: 'Em ponto', icon: '🕛', phonetic: 'ou clók', example: 'It\'s <strong>seven</strong> <strong>o\'clock</strong>.', examplePt: 'São sete em ponto.', categoryType: 'TIME' },
-{ word: 'half past', translation: 'Meia hora depois', icon: '🕡', phonetic: 'ráf pěst', example: 'It\'s <strong>half past</strong> <strong>six</strong>.', examplePt: 'São seis e meia (30 minutos depois).', categoryType: 'TIME' },
-{ word: 'quarter to', translation: 'Quinze minutos para', icon: '🕦', phonetic: 'cúarter tu', example: 'It\'s <strong>quarter to</strong> <strong>eight</strong>.', examplePt: 'Faltam 15 minutos para as oito.', categoryType: 'TIME' },
-{ word: 'quarter past', translation: 'Quinze minutos depois', icon: '🕧', phonetic: 'cúarter pěst', example: 'It\'s <strong>quarter past</strong> <strong>twelve</strong>.', examplePt: 'São doze e quinze (15 minutos depois).', categoryType: 'TIME' },
-{ word: 'day', translation: 'Dia', icon: '☀️', phonetic: 'dêi', example: 'It was a <strong>long</strong> <strong>day</strong>.', examplePt: 'Foi um longo dia.', categoryType: 'TIME' },
-{ word: 'week', translation: 'Semana', icon: '📅', phonetic: 'uík', example: 'I will see you <strong>next</strong> <strong>week</strong>.', examplePt: 'Eu te vejo na próxima semana.', categoryType: 'TIME' },
-{ word: 'month', translation: 'Mês', icon: '🗓️', phonetic: 'mânt', example: 'January is the <strong>first</strong> <strong>month</strong> of the year.', examplePt: 'Janeiro é o primeiro mês do ano.', categoryType: 'TIME' },
-{ word: 'year', translation: 'Ano', icon: '🎉', phonetic: 'iar', example: 'This has been a <strong>great</strong> <strong>year</strong>.', examplePt: 'Este tem sido um ótimo ano.', categoryType: 'TIME' },
-{ word: 'morning', translation: 'Manhã', icon: '🌅', phonetic: 'mórnin', example: 'I wake up <strong>early</strong> every <strong>morning</strong>.', examplePt: 'Eu acordo cedo toda manhã.', categoryType: 'TIME' },
-{ word: 'afternoon', translation: 'Tarde', icon: '☀️', phonetic: 'afternun', example: 'I have a <strong>meeting</strong> this <strong>afternoon</strong>.', examplePt: 'Eu tenho uma reunião nesta tarde.', categoryType: 'TIME' },
-{ word: 'evening', translation: 'Noite (Início)', icon: '🌃', phonetic: 'ívnin', example: 'We\'ll have <strong>dinner</strong> this <strong>evening</strong>.', examplePt: 'Nós jantaremos nesta noite.', categoryType: 'TIME' },
-{ word: 'night', translation: 'Noite', icon: '🌙', phonetic: 'naíte', example: 'I like to <strong>watch</strong> the stars at <strong>night</strong>.', examplePt: 'Eu gosto de observar as estrelas à noite.', categoryType: 'TIME' },
-{ word: 'yesterday', translation: 'Ontem', icon: '🔙', phonetic: 'iésterdêi', example: 'What did you <strong>do</strong> <strong>yesterday</strong>', examplePt: 'O que você fez ontem?', categoryType: 'TIME' },
-{ word: 'today', translation: 'Hoje', icon: '➡️', phonetic: 'tudêi', example: 'We are <strong>busy</strong> <strong>today</strong>.', examplePt: 'Nós estamos ocupados hoje.', categoryType: 'TIME' },
-{ word: 'tomorrow', translation: 'Amanhã', icon: '🔜', phonetic: 'tumórou', example: 'We <strong>leave</strong> <strong>tomorrow</strong> morning.', examplePt: 'Nós partimos amanhã de manhã.', categoryType: 'TIME' }
-                ]
-            },
-            religion: {
-                title: 'RELIGIÃO (RELIGION)',
-                description: 'Vocabulário sobre crenças e cultos',
-                words: [
-                    // CRENÇAS E CONCEITOS CENTRAIS
-{ word: 'God', translation: 'Deus', icon: '✨', phonetic: 'gád', example: 'Christians believe in <strong>one</strong> <strong>God</strong>.', examplePt: 'Os cristãos acreditam em um único Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'faith', translation: 'Fé', icon: '🕊️', phonetic: 'fêith', example: 'He has <strong>great</strong> <strong>faith</strong> in the future.', examplePt: 'Ele tem grande fé no futuro.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'belief', translation: 'Crença', icon: '💡', phonetic: 'bilíf', example: 'What are your <strong>core</strong> <strong>beliefs?</strong>', examplePt: 'Quais são as suas crenças centrais?', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'spirit', translation: 'Espírito', icon: '🌬️', phonetic: 'spírit', example: 'The <strong>body</strong> and the <strong>spirit</strong> are connected.', examplePt: 'O corpo e o espírito estão conectados.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'soul', translation: 'Alma', icon: '💫', phonetic: 'sôul', example: 'Many believe the <strong>soul</strong> is <strong>immortal</strong>.', examplePt: 'Muitos acreditam que a alma é imortal.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'heaven', translation: 'Céu (Paraíso)', icon: '☁️', phonetic: 'réven', example: 'They hope to <strong>go</strong> to <strong>heaven</strong>.', examplePt: 'Eles esperam ir para o céu.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'Jesus', translation: 'Jesus', icon: '✝️', phonetic: 'djíizâs', example: 'The <strong>story</strong> of <strong>Jesus</strong> is in the New Testament.', examplePt: 'A história de Jesus está no Novo Testamento.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'Holy Spirit', translation: 'Espírito Santo', icon: '🕊️', phonetic: 'rôuli spírit', example: 'The <strong>Father</strong>, the Son, and the <strong>Holy Spirit</strong>.', examplePt: 'O Pai, o Filho e o Espírito Santo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'hell', translation: 'Inferno', icon: '🔥', phonetic: 'rél', example: 'The <strong>sermon</strong> warned about <strong>hell</strong>.', examplePt: 'O sermão alertou sobre o inferno.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'sin', translation: 'Pecado', icon: '🚫', phonetic: 'sín', example: 'He <strong>confessed</strong> his <strong>sin</strong>.', examplePt: 'Ele confessou seu pecado.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'salvation', translation: 'Salvação', icon: '🛡️', phonetic: 'salvêichan', example: 'The <strong>path</strong> to <strong>salvation</strong> is often taught.', examplePt: 'O caminho para a salvação é frequentemente ensinado.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'forgiveness', translation: 'Perdão', icon: '🤝', phonetic: 'forguívness', example: 'She <strong>asked</strong> for <strong>forgiveness</strong>.', examplePt: 'Ela pediu perdão.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'redemption', translation: 'Redenção', icon: '🕊️', phonetic: 'ridêmpchan', example: 'The story is about <strong>personal</strong> <strong>redemption</strong>.', examplePt: 'A história é sobre redenção pessoal.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'miracle', translation: 'Milagre', icon: '✨', phonetic: 'míracle', example: 'The <strong>doctor</strong> called her recovery a <strong>miracle</strong>.', examplePt: 'O médico chamou sua recuperação de milagre.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'prophet', translation: 'Profeta', icon: '👤', phonetic: 'prófit', example: 'Moses is considered a <strong>major</strong> <strong>prophet</strong>.', examplePt: 'Moisés é considerado um grande profeta.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'afterlife', translation: 'Vida Após a Morte', icon: '⚰️', phonetic: 'éfterláif', example: 'Hindus believe in <strong>reincarnation</strong> in the <strong>afterlife</strong>.', examplePt: 'Os hindus acreditam em reencarnação na vida após a morte.', categoryType: 'RELIGION_AND_BELIEFS' },
-// PESSOAS E CARGOS
-{ word: 'priest', translation: 'Padre/Sacerdote', icon: '✝️', phonetic: 'príst', example: 'The <strong>priest</strong> <strong>performed</strong> the ceremony.', examplePt: 'O padre realizou a cerimônia.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'pastor', translation: 'Pastor', icon: '👨‍🦱', phonetic: 'péstor', example: 'The <strong>pastor</strong> gave a <strong>sermon</strong>.', examplePt: 'O pastor fez um sermão.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'rabbi', translation: 'Rabi', icon: '🕎', phonetic: 'rábai', example: 'The <strong>rabbi</strong> is a <strong>Jewish</strong> scholar.', examplePt: 'O rabi é um estudioso judeu.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'imam', translation: 'Imã', icon: '☪️', phonetic: 'imán', example: 'The <strong>imam</strong> <strong>leads</strong> the prayer in the mosque.', examplePt: 'O imã lidera a oração na mesquita.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'monk', translation: 'Monge', icon: '🧘', phonetic: 'mânke', example: 'The <strong>Buddhist</strong> <strong>monk</strong> lives simply.', examplePt: 'O monge budista vive de forma simples.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'nun', translation: 'Freira', icon: '🧕', phonetic: 'nãn', example: 'A <strong>nun</strong> dedicated her <strong>life</strong> to service.', examplePt: 'Uma freira dedicou sua vida ao serviço.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'saint', translation: 'Santo', icon: '😇', phonetic: 'sêint', example: 'They <strong>pray</strong> to their favorite <strong>saint</strong>.', examplePt: 'Eles oram para o seu santo favorito.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'pilgrim', translation: 'Peregrino', icon: '🚶', phonetic: 'pílgrim', example: '<strong>Thousands</strong> of <strong>pilgrims</strong> visited the site.', examplePt: 'Milhares de peregrinos visitaram o local.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'believer', translation: 'Crente/Fiel', icon: '🙌', phonetic: 'bilíver', example: 'He is a <strong>devout</strong> <strong>believer</strong>.', examplePt: 'Ele é um crente devoto.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'atheist', translation: 'Ateu', icon: '🤷', phonetic: 'êithiist', example: 'An <strong>atheist</strong> does not <strong>believe</strong> in God.', examplePt: 'Um ateu não acredita em Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'agnostic', translation: 'Agnóstico', icon: '🤔', phonetic: 'agnóstic', example: 'An <strong>agnostic</strong> <strong>doubts</strong> the existence of God.', examplePt: 'Um agnóstico duvida da existência de Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
-// LOCAIS E TEXTOS SAGRADOS
-{ word: 'church', translation: 'Igreja', icon: '⛪', phonetic: 'tchêrtch', example: 'They <strong>go</strong> to <strong>church</strong> every Sunday.', examplePt: 'Eles vão à igreja todo domingo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'temple', translation: 'Templo', icon: '🕍', phonetic: 'têmpol', example: 'The <strong>Buddhist</strong> <strong>temple</strong> is very quiet.', examplePt: 'O templo budista é muito silencioso.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'mosque', translation: 'Mesquita', icon: '🕌', phonetic: 'mósk', example: 'Muslims <strong>pray</strong> at the <strong>mosque</strong>.', examplePt: 'Os muçulmanos oram na mesquita.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'synagogue', translation: 'Sinagoga', icon: '✡️', phonetic: 'sínagog', example: 'The <strong>synagogue</strong> is a place of <strong>Jewish</strong> worship.', examplePt: 'A sinagoga é um local de culto judeu.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'bible', translation: 'Bíblia', icon: '📖', phonetic: 'báibol', example: 'She <strong>reads</strong> the <strong>Bible</strong> every morning.', examplePt: 'Ela lê a Bíblia toda manhã.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'quran', translation: 'Alcorão', icon: '📜', phonetic: 'cuorán', example: 'The <strong>Quran</strong> is the <strong>holy</strong> book of Islam.', examplePt: 'O Alcorão é o livro sagrado do Islã.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'torah', translation: 'Torá', icon: '📜', phonetic: 'tóra', example: 'The <strong>Torah</strong> contains the <strong>laws</strong> of Judaism.', examplePt: 'A Torá contém as leis do Judaísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'altar', translation: 'Altar', icon: '🕯️', phonetic: 'óltar', example: 'Flowers were <strong>placed</strong> on the <strong>altar</strong>.', examplePt: 'Flores foram colocadas no altar.', categoryType: 'RELIGION_AND_BELIEFS' },
-// RITUAIS E AÇÕES
-{ word: 'prayer', translation: 'Oração', icon: '🙏', phonetic: 'préier', example: 'We said a <strong>silent</strong> <strong>prayer</strong> for him.', examplePt: 'Nós fizemos uma oração silenciosa por ele.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'worship', translation: 'Adoração/Culto', icon: '🛐', phonetic: 'uôrship', example: 'They gather for <strong>collective</strong> <strong>worship</strong>.', examplePt: 'Eles se reúnem para adoração coletiva.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'blessing', translation: 'Bênção', icon: '🙌', phonetic: 'bléssing', example: 'The <strong>blessing</strong> brought <strong>peace</strong>.', examplePt: 'A bênção trouxe paz.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'fasting', translation: 'Jejum', icon: '💧', phonetic: 'fésting', example: 'Many <strong>religions</strong> practice <strong>fasting</strong>.', examplePt: 'Muitas religiões praticam o jejum.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'meditation', translation: 'Meditação', icon: '🧘‍♀️', phonetic: 'meditêichan', example: 'She practices <strong>meditation</strong> <strong>daily</strong>.', examplePt: 'Ela pratica meditação diariamente.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'pilgrimage', translation: 'Peregrinação', icon: '🚶', phonetic: 'pilgrimidj', example: 'Making the <strong>pilgrimage</strong> to <strong>Mecca</strong> is required.', examplePt: 'Fazer a peregrinação a Meca é obrigatório.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'confession', translation: 'Confissão', icon: '🗣️', phonetic: 'conféchan', example: 'The <strong>act</strong> of <strong>confession</strong> is central to some faiths.', examplePt: 'O ato de confissão é central para algumas fés.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'baptism', translation: 'Batismo', icon: '💦', phonetic: 'báptizm', example: 'The <strong>baby\'s</strong> <strong>baptism</strong> was last month.', examplePt: 'O batismo do bebê foi no mês passado.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'communion', translation: 'Comunhão', icon: '🍷', phonetic: 'commúnion', example: 'They shared the <strong>body</strong> and blood during <strong>communion</strong>.', examplePt: 'Eles compartilharam o corpo e o sangue durante a comunhão.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'ritual', translation: 'Ritual', icon: '🕯️', phonetic: 'rítchual', example: 'The <strong>wedding</strong> involved many ancient <strong>rituals</strong>.', examplePt: 'O casamento envolveu muitos rituais antigos.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'sermon', translation: 'Sermão/Pregação', icon: '🗣️', phonetic: 'sêrmon', example: 'The <strong>sermon</strong> was about <strong>forgiveness</strong>.', examplePt: 'O sermão foi sobre perdão.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'prophecy', translation: 'Profecia', icon: '🔮', phonetic: 'prófesi', example: 'Ancient <strong>texts</strong> contain a famous <strong>prophecy</strong>.', examplePt: 'Textos antigos contêm uma famosa profecia.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'preach', translation: 'Pregar', icon: '🎤', phonetic: 'prítch', example: 'He was <strong>called</strong> to <strong>preach</strong> the gospel.', examplePt: 'Ele foi chamado para pregar o evangelho.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'chant', translation: 'Cântico/Cantar (ritual)', icon: '🎶', phonetic: 'tchént', example: 'The <strong>monks</strong> began to <strong>chant</strong>.', examplePt: 'Os monges começaram o cântico.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'convert', translation: 'Converter-se', icon: '🔄', phonetic: 'convêrt', example: 'She decided to <strong>convert</strong> to <strong>Islam</strong>.', examplePt: 'Ela decidiu converter-se ao Islã.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'oath', translation: 'Juramento', icon: '📜', phonetic: 'ôuth', example: 'He took an <strong>oath</strong> on the <strong>sacred</strong> book.', examplePt: 'Ele fez um juramento sobre o livro sagrado.', categoryType: 'RELIGION_AND_BELIEFS' },
-// TERMOS ESPECÍFICOS
-{ word: 'disciple', translation: 'Discípulo', icon: '🚶‍♂️', phonetic: 'disáipol', example: 'Jesus and his <strong>twelve</strong> <strong>disciples</strong>.', examplePt: 'Jesus e seus doze discípulos.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'angel', translation: 'Anjo', icon: '👼', phonetic: 'êindjel', example: 'The <strong>painting</strong> shows a beautiful <strong>angel</strong>.', examplePt: 'A pintura mostra um lindo anjo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'scripture', translation: 'Escritura Sagrada', icon: '📖', phonetic: 'scríptchur', example: 'We <strong>read</strong> from the <strong>scriptures</strong>.', examplePt: 'Nós lemos das escrituras sagradas.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'sacrament', translation: 'Sacramento', icon: '➕', phonetic: 'sácrament', example: 'Marriage is considered a <strong>holy</strong> <strong>sacrament</strong>.', examplePt: 'O casamento é considerado um sacramento sagrado.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'revelation', translation: 'Revelação', icon: '🌟', phonetic: 'revelêichan', example: 'He claimed to have received a <strong>divine</strong> <strong>revelation</strong>.', examplePt: 'Ele alegou ter recebido uma revelação divina.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'paradise', translation: 'Paraíso', icon: '🏝️', phonetic: 'páradais', example: 'They <strong>visualize</strong> <strong>paradise</strong> as a garden.', examplePt: 'Eles visualizam o paraíso como um jardim.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'monotheism', translation: 'Monoteísmo', icon: '1️⃣', phonetic: 'monothíizm', example: 'Judaism is a <strong>monotheism</strong> <strong>religion</strong>.', examplePt: 'O Judaísmo é uma religião de monoteísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'polytheism', translation: 'Politeísmo', icon: '🔟', phonetic: 'polithíizm', example: 'Hinduism is a <strong>form</strong> of <strong>polytheism</strong>.', examplePt: 'O Hinduísmo é uma forma de politeísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
-{ word: 'secular', translation: 'Secular/Laico', icon: '🏢', phonetic: 'sékular', example: 'The <strong>government</strong> is officially <strong>secular</strong>.', examplePt: 'O governo é oficialmente secular.', categoryType: 'RELIGION_AND_BELIEFS' }
-                ]
-            },
-            education: { 
-                title: 'EDUCAÇÃO (EDUCATION)',
-                description: 'Vocabulário sobre fases, cargos e estudos',
-                words: [
-                    // PESSOAL E CARGOS
-{ word: 'teacher', translation: 'professor(a)', icon: '👩‍🏫', phonetic: 'tíitcher', example: 'The <strong>teacher</strong> explained the <strong>lesson</strong> clearly.', examplePt: 'O professor explicou a lição claramente.', categoryType: 'EDUCATION' },
-{ word: 'student', translation: 'estudante/aluno(a)', icon: '👨‍🎓', phonetic: 'stiúdent', example: 'The <strong>new</strong> <strong>student</strong> is from Spain.', examplePt: 'O novo aluno é da Espanha.', categoryType: 'EDUCATION' },
-{ word: 'principal', translation: 'diretor(a)', icon: '👔', phonetic: 'príncipal', example: 'The <strong>principal</strong> gave a <strong>speech</strong>.', examplePt: 'O diretor fez um discurso.', categoryType: 'EDUCATION' },
-{ word: 'vice-principal', translation: 'vice-diretor(a)', icon: '🤵', phonetic: 'váis príncipal', example: 'The <strong>vice-principal</strong> handles <strong>discipline</strong>.', examplePt: 'O vice-diretor lida com a disciplina.', categoryType: 'EDUCATION' },
-{ word: 'counselor', translation: 'orientador(a) / conselheiro(a)', icon: '💬', phonetic: 'cáunselor', example: '<strong>Talk</strong> to the <strong>counselor</strong> about your college applications.', examplePt: 'Fale com o orientador sobre suas candidaturas à faculdade.', categoryType: 'EDUCATION' },
-{ word: 'janitor', translation: 'zelador(a)/faxineiro(a)', icon: '🧹', phonetic: 'djénitor', example: 'The <strong>janitor</strong> cleans the <strong>hallways</strong>.', examplePt: 'O zelador limpa os corredores.', categoryType: 'EDUCATION' },
-{ word: 'lecturer', translation: 'palestrante/prof. universitário', icon: '🎤', phonetic: 'lécturer', example: 'The <strong>lecturer</strong> is an <strong>expert</strong> in physics.', examplePt: 'O palestrante é um especialista em física.', categoryType: 'EDUCATION' },
-{ word: 'professor', translation: 'professor titular/catedrático', icon: '👨‍🔬', phonetic: 'proféssor', example: 'She is a <strong>tenured</strong> <strong>professor</strong> at Harvard.', examplePt: 'Ela é uma professora titular em Harvard.', categoryType: 'EDUCATION' },
-{ word: 'tutor', translation: 'tutor/prof. particular', icon: '📝', phonetic: 'tútor', example: 'I <strong>hired</strong> a <strong>tutor</strong> to help with chemistry.', examplePt: 'Eu contratei um tutor para ajudar com química.', categoryType: 'EDUCATION' },
-{ word: 'staff', translation: 'equipe/funcionários', icon: '👥', phonetic: 'stéf', example: 'The school <strong>staff</strong> held a <strong>meeting</strong>.', examplePt: 'A equipe da escola fez uma reunião.', categoryType: 'EDUCATION' },
-{ word: 'librarian', translation: 'bibliotecário(a)', icon: '👩‍💼', phonetic: 'laibrérian', example: '<strong>Ask</strong> the <strong>librarian</strong> for help finding the book.', examplePt: 'Peça ajuda ao bibliotecário para encontrar o livro.', categoryType: 'EDUCATION' },
-// FASES E LOCAIS
-{ word: 'school', translation: 'escola', icon: '🏫', phonetic: 'scúl', example: 'I <strong>walk</strong> to <strong>school</strong> every day.', examplePt: 'Eu vou a pé para a escola todos os dias.', categoryType: 'EDUCATION' },
-{ word: 'preschool', translation: 'pré-escola', icon: '👶', phonetic: 'príscul', example: 'My <strong>son</strong> is in <strong>preschool</strong>.', examplePt: 'Meu filho está na pré-escola.', categoryType: 'EDUCATION' },
-{ word: 'kindergarten', translation: 'jardim de infância', icon: '🧸', phonetic: 'kíndergartern', example: 'She learned to <strong>read</strong> in <strong>kindergarten</strong>.', examplePt: 'Ela aprendeu a ler no jardim de infância.', categoryType: 'EDUCATION' },
-{ word: 'elementary school', translation: 'ensino fundamental i', icon: '🍎', phonetic: 'eleméntari scul', example: 'I <strong>loved</strong> <strong>elementary school</strong>.', examplePt: 'Eu amava o Ensino Fundamental I.', categoryType: 'EDUCATION' },
-{ word: 'middle school', translation: 'ensino fundamental ii', icon: '🎒', phonetic: 'mídol scul', example: 'I <strong>studied</strong> <strong>algebra</strong> in middle school.', examplePt: 'Eu estudei álgebra no Ensino Fundamental II.', categoryType: 'EDUCATION' },
-{ word: 'high school', translation: 'ensino médio', icon: '🎒', phonetic: 'rái scul', example: 'She <strong>graduates</strong> from <strong>high school</strong> next year.', examplePt: 'Ela se forma no Ensino Médio no próximo ano.', categoryType: 'EDUCATION' },
-{ word: 'college', translation: 'faculdade/ensino superior', icon: '🎓', phonetic: 'cólidj', example: 'He is <strong>going</strong> to <strong>college</strong> to study art.', examplePt: 'Ele vai para a faculdade estudar arte.', categoryType: 'EDUCATION' },
-{ word: 'university', translation: 'universidade', icon: '🎓', phonetic: 'iunivérsiti', example: 'She <strong>studies</strong> <strong>law</strong> at the university.', examplePt: 'Ela estuda direito na universidade.', categoryType: 'EDUCATION' },
-{ word: 'campus', translation: 'campus', icon: '🌳', phonetic: 'kémpus', example: 'The university <strong>campus</strong> is <strong>huge</strong>.', examplePt: 'O campus da universidade é enorme.', categoryType: 'EDUCATION' },
-{ word: 'library', translation: 'biblioteca', icon: '🏛️', phonetic: 'laibréri', example: 'The <strong>library</strong> is <strong>quiet</strong>.', examplePt: 'A biblioteca é silenciosa.', categoryType: 'EDUCATION' },
-{ word: 'dormitory (dorm)', translation: 'dormitório/moradia estudantil', icon: '🛏️', phonetic: 'dórmitóri (dorm)', example: 'Most <strong>students</strong> live in a <strong>dormitory</strong>.', examplePt: 'A maioria dos estudantes mora em um dormitório.', categoryType: 'EDUCATION' },
-{ word: 'auditorium', translation: 'auditório', icon: '🎭', phonetic: 'auditórium', example: 'The <strong>play</strong> was held in the <strong>auditorium</strong>.', examplePt: 'A peça foi realizada no auditório.', categoryType: 'EDUCATION' },
-{ word: 'cafeteria', translation: 'cantina/refeitório', icon: '🍔', phonetic: 'cafetíria', example: 'We <strong>eat</strong> <strong>lunch</strong> in the cafeteria.', examplePt: 'Nós almoçamos na cantina.', categoryType: 'EDUCATION' },
-// MATERIAIS E OBJETOS
-{ word: 'book', translation: 'livro', icon: '📚', phonetic: 'búk', example: '<strong>Read</strong> the <strong>next</strong> chapter of the book.', examplePt: 'Leia o próximo capítulo do livro.', categoryType: 'EDUCATION' },
-{ word: 'textbook', translation: 'livro didático', icon: '📘', phonetic: 'téxt búk', example: 'Bring your <strong>math</strong> <strong>textbook</strong> to class.', examplePt: 'Traga seu livro didático de matemática para a aula.', categoryType: 'EDUCATION' },
-{ word: 'notebook', translation: 'caderno', icon: '📓', phonetic: 'noutbúk', example: '<strong>Write</strong> the <strong>notes</strong> in your notebook.', examplePt: 'Escreva as anotações no seu caderno.', categoryType: 'EDUCATION' },
-{ word: 'pen', translation: 'caneta', icon: '🖊️', phonetic: 'pén', example: 'Do you have a <strong>blue</strong> <strong>pen</strong>?', examplePt: 'Você tem uma caneta azul?', categoryType: 'EDUCATION' },
-{ word: 'pencil', translation: 'lápis', icon: '✏️', phonetic: 'pénsil', example: 'I need to <strong>sharpen</strong> my <strong>pencil</strong>.', examplePt: 'Eu preciso apontar meu lápis.', categoryType: 'EDUCATION' },
-{ word: 'paper', translation: 'papel', icon: '📄', phonetic: 'pêiper', example: '<strong>Hand</strong> me a <strong>sheet</strong> of paper.', examplePt: 'Me entregue uma folha de papel.', categoryType: 'EDUCATION' },
-{ word: 'backpack', translation: 'mochila', icon: '🎒', phonetic: 'békpak', example: 'My <strong>backpack</strong> is very <strong>heavy</strong>.', examplePt: 'Minha mochila está muito pesada.', categoryType: 'EDUCATION' },
-{ word: 'dictionary', translation: 'dicionário', icon: '📙', phonetic: 'díctionéri', example: '<strong>Look</strong> up the <strong>meaning</strong> in the dictionary.', examplePt: 'Procure o significado no dicionário.', categoryType: 'EDUCATION' },
-{ word: 'ruler', translation: 'régua', icon: '📏', phonetic: 'rúler', example: '<strong>Use</strong> a <strong>ruler</strong> to draw a straight line.', examplePt: 'Use uma régua para traçar uma linha reta.', categoryType: 'EDUCATION' },
-{ word: 'eraser', translation: 'borracha', icon: '⬜', phonetic: 'irêiser', example: 'I <strong>need</strong> an <strong>eraser</strong> to fix this mistake.', examplePt: 'Eu preciso de uma borracha para corrigir este erro.', categoryType: 'EDUCATION' },
-{ word: 'marker', translation: 'caneta/marcador', icon: '🖍️', phonetic: 'márker', example: 'Use a <strong>black</strong> <strong>marker</strong> for the poster.', examplePt: 'Use um marcador preto para o cartaz.', categoryType: 'EDUCATION' },
-{ word: 'scissors', translation: 'tesoura', icon: '✂️', phonetic: 'sízors', example: 'The <strong>child</strong> uses <strong>safety</strong> scissors.', examplePt: 'A criança usa tesoura sem ponta.', categoryType: 'EDUCATION' },
-{ word: 'glue', translation: 'cola', icon: '🧴', phonetic: 'glú', example: 'We <strong>need</strong> <strong>glue</strong> for the craft project.', examplePt: 'Nós precisamos de cola para o projeto de artesanato.', categoryType: 'EDUCATION' },
-{ word: 'chalk', translation: 'giz', icon: '🖍️', phonetic: 'tchók', example: 'The <strong>teacher</strong> wrote on the board with <strong>chalk</strong>.', examplePt: 'A professora escreveu no quadro com giz.', categoryType: 'EDUCATION' },
-{ word: 'globe', translation: 'globo terrestre', icon: '🌐', phonetic: 'glôub', example: 'The <strong>globe</strong> shows <strong>all</strong> the continents.', examplePt: 'O globo terrestre mostra todos os continentes.', categoryType: 'EDUCATION' },
-{ word: 'projector', translation: 'projetor', icon: '📽️', phonetic: 'prodjécto', example: 'The <strong>slides</strong> are shown on the <strong>projector</strong>.', examplePt: 'Os slides são mostrados no projetor.', categoryType: 'EDUCATION' },
-// AÇÕES E PROCESSOS
-{ word: 'study', translation: 'estudar', icon: '✍️', phonetic: 'stâdi', example: 'I <strong>need</strong> to <strong>study</strong> hard.', examplePt: 'Eu preciso estudar muito.', categoryType: 'EDUCATION' },
-{ word: 'learn', translation: 'aprender', icon: '🧠', phonetic: 'lêrn', example: 'We <strong>learn</strong> new <strong>things</strong> every day.', examplePt: 'Nós aprendemos coisas novas todos os dias.', categoryType: 'EDUCATION' },
-{ word: 'write', translation: 'escrever', icon: '✍️', phonetic: 'ráit', example: 'Can you <strong>write</strong> your <strong>name</strong>?', examplePt: 'Você pode escrever seu nome?', categoryType: 'EDUCATION' },
-{ word: 'read', translation: 'ler', icon: '👁️', phonetic: 'ríd', example: 'I like to <strong>read</strong> <strong>books</strong>.', examplePt: 'Eu gosto de ler livros.', categoryType: 'EDUCATION' },
-{ word: 'memorize', translation: 'memorizar', icon: '🤯', phonetic: 'mémorais', example: 'You must <strong>memorize</strong> the <strong>poem</strong>.', examplePt: 'Você deve memorizar o poema.', categoryType: 'EDUCATION' },
-{ word: 'discuss', translation: 'discutir/debater', icon: '🗣️', phonetic: 'discâss', example: 'We <strong>need</strong> to <strong>discuss</strong> the topic.', examplePt: 'Nós precisamos discutir o tópico.', categoryType: 'EDUCATION' },
-{ word: 'attend', translation: 'frequentar/participar', icon: '✔️', phonetic: 'aténd', example: 'You must <strong>attend</strong> all <strong>lectures</strong>.', examplePt: 'Você deve frequentar todas as palestras.', categoryType: 'EDUCATION' },
-{ word: 'graduate', translation: 'formar-se', icon: '👩‍🎓', phonetic: 'grádjueit', example: 'She will <strong>graduate</strong> next <strong>May</strong>.', examplePt: 'Ela vai se formar em maio próximo.', categoryType: 'EDUCATION' },
-{ word: 'teach', translation: 'ensinar', icon: '🎓', phonetic: 'títch', example: 'He will <strong>teach</strong> us <strong>math</strong>.', examplePt: 'Ele vai nos ensinar matemática.', categoryType: 'EDUCATION' },
-{ word: 'submit', translation: 'entregar (trabalho)', icon: '📤', phonetic: 'sâbmít', example: 'Please <strong>submit</strong> your <strong>essay</strong> online.', examplePt: 'Por favor, entregue seu ensaio online.', categoryType: 'EDUCATION' },
-{ word: 'review', translation: 'revisar', icon: '🔄', phonetic: 'rivíu', example: 'Let\'s <strong>review</strong> the <strong>chapter</strong> before the test.', examplePt: 'Vamos revisar o capítulo antes da prova.', categoryType: 'EDUCATION' },
-{ word: 'enroll', translation: 'matricular-se', icon: '🆔', phonetic: 'enrôl', example: 'You need to <strong>enroll</strong> before the <strong>deadline</strong>.', examplePt: 'Você precisa se matricular antes do prazo.', categoryType: 'EDUCATION' },
-{ word: 'research', translation: 'pesquisar', icon: '🔬', phonetic: 'rísêrtch', example: 'I am doing <strong>research</strong> for my <strong>thesis</strong>.', examplePt: 'Eu estou fazendo pesquisa para minha tese.', categoryType: 'EDUCATION' },
-{ word: 'present', translation: 'apresentar', icon: '🎤', phonetic: 'prezént', example: 'Students will <strong>present</strong> their <strong>projects</strong>.', examplePt: 'Os alunos vão apresentar seus projetos.', categoryType: 'EDUCATION' },
-{ word: 'explain', translation: 'explicar', icon: '💡', phonetic: 'explêin', example: 'Can you <strong>explain</strong> this <strong>concept</strong>?', examplePt: 'Você pode explicar este conceito?', categoryType: 'EDUCATION' },
-{ word: 'question', translation: 'perguntar/questão', icon: '❓', phonetic: 'cuestchân', example: 'The <strong>student</strong> raised a <strong>question</strong>.', examplePt: 'O aluno levantou uma questão.', categoryType: 'EDUCATION' },
-{ word: 'solve', translation: 'resolver', icon: '🧩', phonetic: 'sólv', example: 'We need to <strong>solve</strong> this <strong>math</strong> problem.', examplePt: 'Nós precisamos resolver este problema de matemática.', categoryType: 'EDUCATION' },
-{ word: 'assist', translation: 'assistir/apoiar', icon: '🤝', phonetic: 'assíst', example: 'The <strong>tutor</strong> will <strong>assist</strong> you.', examplePt: 'O tutor vai te apoiar.', categoryType: 'EDUCATION' },
-{ word: 'take notes', translation: 'fazer anotações', icon: '✍️', phonetic: 'teik nôuts', example: 'Be <strong>sure</strong> to <strong>take notes</strong> during the lecture.', examplePt: 'Certifique-se de fazer anotações durante a palestra.', categoryType: 'EDUCATION' },
-// AVALIAÇÃO E TERMOS ACADÊMICOS
-{ word: 'class', translation: 'aula/disciplina/turma', icon: '🧑‍🤝‍🧑', phonetic: 'cléss', example: 'I have <strong>history</strong> <strong>class</strong> now.', examplePt: 'Eu tenho aula de história agora.', categoryType: 'EDUCATION' },
-{ word: 'subject', translation: 'matéria/disciplina', icon: '📎', phonetic: 'sâbdjéct', example: 'My <strong>favorite</strong> <strong>subject</strong> is science.', examplePt: 'Minha matéria favorita é ciência.', categoryType: 'EDUCATION' },
-{ word: 'lesson', translation: 'lição', icon: '📖', phonetic: 'léssan', example: 'Today\'s <strong>lesson</strong> is about <strong>grammar</strong>.', examplePt: 'A lição de hoje é sobre gramática.', categoryType: 'EDUCATION' },
-{ word: 'homework', translation: 'tarefa de casa', icon: '📝', phonetic: 'róumuérk', example: 'Don\'t forget your <strong>homework</strong> <strong>tonight</strong>.', examplePt: 'Não se esqueça da sua tarefa de casa.', categoryType: 'EDUCATION' },
-{ word: 'test', translation: 'prova/teste', icon: '💯', phonetic: 'tést', example: 'We have a <strong>big</strong> <strong>test</strong> tomorrow.', examplePt: 'Nós temos uma grande prova amanhã.', categoryType: 'EDUCATION' },
-{ word: 'exam', translation: 'exame/prova final', icon: '📜', phonetic: 'exém', example: 'The <strong>final</strong> <strong>exam</strong> is next week.', examplePt: 'O exame final é na próxima semana.', categoryType: 'EDUCATION' },
-{ word: 'quiz', translation: 'questionário/teste rápido', icon: '🧠', phonetic: 'cuíz', example: 'We have a <strong>short</strong> <strong>quiz</strong> on Friday.', examplePt: 'Nós temos um questionário rápido na sexta-feira.', categoryType: 'EDUCATION' },
-{ word: 'grade', translation: 'nota/conceito', icon: 'A+', phonetic: 'grêid', example: 'What <strong>grade</strong> did you <strong>get</strong>?', examplePt: 'Que nota você tirou?', categoryType: 'EDUCATION' },
-{ word: 'gpa', translation: 'média de notas (gpa)', icon: '📊', phonetic: 'dji pí êi', example: 'A <strong>high</strong> <strong>GPA</strong> is required for the scholarship.', examplePt: 'Uma média de notas alta é exigida para a bolsa.', categoryType: 'EDUCATION' },
-{ word: 'assignment', translation: 'trabalho/tarefa', icon: '📃', phonetic: 'asaimment', example: 'The <strong>assignment</strong> is <strong>due</strong> next Monday.', examplePt: 'O trabalho é para a próxima segunda-feira.', categoryType: 'EDUCATION' },
-{ word: 'essay', translation: 'ensaio/redação', icon: '✍️', phonetic: 'éssei', example: 'I have to <strong>write</strong> a <strong>3000-word</strong> essay.', examplePt: 'Eu tenho que escrever uma redação de 3000 palavras.', categoryType: 'EDUCATION' },
-{ word: 'report', translation: 'relatório', icon: '📄', phonetic: 'ripórt', example: 'Please <strong>submit</strong> your <strong>lab</strong> report.', examplePt: 'Por favor, entregue seu relatório de laboratório.', categoryType: 'EDUCATION' },
-{ word: 'midterm', translation: 'prova de meio de semestre', icon: '🗓️', phonetic: 'mídtêrm', example: 'The <strong>midterm</strong> <strong>exam</strong> is very important.', examplePt: 'A prova de meio de semestre é muito importante.', categoryType: 'EDUCATION' },
-{ word: 'semester', translation: 'semestre', icon: '🗓️', phonetic: 'seméster', example: 'This <strong>semester</strong> <strong>starts</strong> in August.', examplePt: 'Este semestre começa em agosto.', categoryType: 'EDUCATION' },
-{ word: 'diploma', translation: 'diploma', icon: '📜', phonetic: 'diplôuma', example: 'He <strong>received</strong> his <strong>diploma</strong> after graduation.', examplePt: 'Ele recebeu seu diploma após a formatura.', categoryType: 'EDUCATION' },
-{ word: 'degree', translation: 'grau acadêmico', icon: '🎓', phonetic: 'digrí', example: 'She has a <strong>Master\'s</strong> <strong>degree</strong>.', examplePt: 'Ela tem um grau de Mestre.', categoryType: 'EDUCATION' },
-{ word: 'scholarship', translation: 'bolsa de estudo', icon: '💰', phonetic: 'scólarship', example: 'He <strong>won</strong> a <strong>full</strong> scholarship.', examplePt: 'Ele ganhou uma bolsa de estudo integral.', categoryType: 'EDUCATION' },
-{ word: 'thesis', translation: 'tese/monografia', icon: '📝', phonetic: 'thísis', example: '<strong>Writing</strong> a <strong>thesis</strong> takes a long time.', examplePt: 'Escrever uma tese leva muito tempo.', categoryType: 'EDUCATION' },
-{ word: 'curriculum', translation: 'currículo', icon: '📃', phonetic: 'currícúlum', example: 'They are <strong>updating</strong> the school <strong>curriculum</strong>.', examplePt: 'Eles estão atualizando o currículo escolar.', categoryType: 'EDUCATION' },
-{ word: 'internship', translation: 'estágio', icon: '💼', phonetic: 'intêrnship', example: 'I am <strong>looking</strong> for an <strong>internship</strong> this summer.', examplePt: 'Eu estou procurando por um estágio neste verão.', categoryType: 'EDUCATION' },
-{ word: 'alumni', translation: 'ex-alunos', icon: '🧑‍🤝‍🧑', phonetic: 'alumnai', example: 'The <strong>alumni</strong> <strong>association</strong> organizes events.', examplePt: 'A associação de ex-alunos organiza eventos.', categoryType: 'EDUCATION' }
-                ]
-            }
+					
+            
+            
         };
 
         // Dados para categorias específicas (specificCategoryData)
@@ -2505,6 +2254,100 @@ if (!isAlphabet) {
 { word: 'basket', translation: 'cesta', icon: '🧺', phonetic: 'básquet', example: '<strong>Put</strong> the <strong>dirty</strong> clothes in the basket.', examplePt: 'Coloque as roupas sujas na cesta.', categoryType: 'HOME' }
                 ]
             },
+			
+			education: { 
+                title: 'EDUCAÇÃO (EDUCATION)',
+                description: 'Vocabulário sobre fases, cargos e estudos',
+                words: [
+                    // PESSOAL E CARGOS
+{ word: 'teacher', translation: 'professor(a)', icon: '👩‍🏫', phonetic: 'tíitcher', example: 'The <strong>teacher</strong> explained the <strong>lesson</strong> clearly.', examplePt: 'O professor explicou a lição claramente.', categoryType: 'EDUCATION' },
+{ word: 'student', translation: 'estudante/aluno(a)', icon: '👨‍🎓', phonetic: 'stiúdent', example: 'The <strong>new</strong> <strong>student</strong> is from Spain.', examplePt: 'O novo aluno é da Espanha.', categoryType: 'EDUCATION' },
+{ word: 'principal', translation: 'diretor(a)', icon: '👔', phonetic: 'príncipal', example: 'The <strong>principal</strong> gave a <strong>speech</strong>.', examplePt: 'O diretor fez um discurso.', categoryType: 'EDUCATION' },
+{ word: 'vice-principal', translation: 'vice-diretor(a)', icon: '🤵', phonetic: 'váis príncipal', example: 'The <strong>vice-principal</strong> handles <strong>discipline</strong>.', examplePt: 'O vice-diretor lida com a disciplina.', categoryType: 'EDUCATION' },
+{ word: 'counselor', translation: 'orientador(a) / conselheiro(a)', icon: '💬', phonetic: 'cáunselor', example: '<strong>Talk</strong> to the <strong>counselor</strong> about your college applications.', examplePt: 'Fale com o orientador sobre suas candidaturas à faculdade.', categoryType: 'EDUCATION' },
+{ word: 'janitor', translation: 'zelador(a)/faxineiro(a)', icon: '🧹', phonetic: 'djénitor', example: 'The <strong>janitor</strong> cleans the <strong>hallways</strong>.', examplePt: 'O zelador limpa os corredores.', categoryType: 'EDUCATION' },
+{ word: 'lecturer', translation: 'palestrante/prof. universitário', icon: '🎤', phonetic: 'lécturer', example: 'The <strong>lecturer</strong> is an <strong>expert</strong> in physics.', examplePt: 'O palestrante é um especialista em física.', categoryType: 'EDUCATION' },
+{ word: 'professor', translation: 'professor titular/catedrático', icon: '👨‍🔬', phonetic: 'proféssor', example: 'She is a <strong>tenured</strong> <strong>professor</strong> at Harvard.', examplePt: 'Ela é uma professora titular em Harvard.', categoryType: 'EDUCATION' },
+{ word: 'tutor', translation: 'tutor/prof. particular', icon: '📝', phonetic: 'tútor', example: 'I <strong>hired</strong> a <strong>tutor</strong> to help with chemistry.', examplePt: 'Eu contratei um tutor para ajudar com química.', categoryType: 'EDUCATION' },
+{ word: 'staff', translation: 'equipe/funcionários', icon: '👥', phonetic: 'stéf', example: 'The school <strong>staff</strong> held a <strong>meeting</strong>.', examplePt: 'A equipe da escola fez uma reunião.', categoryType: 'EDUCATION' },
+{ word: 'librarian', translation: 'bibliotecário(a)', icon: '👩‍💼', phonetic: 'laibrérian', example: '<strong>Ask</strong> the <strong>librarian</strong> for help finding the book.', examplePt: 'Peça ajuda ao bibliotecário para encontrar o livro.', categoryType: 'EDUCATION' },
+// FASES E LOCAIS
+{ word: 'school', translation: 'escola', icon: '🏫', phonetic: 'scúl', example: 'I <strong>walk</strong> to <strong>school</strong> every day.', examplePt: 'Eu vou a pé para a escola todos os dias.', categoryType: 'EDUCATION' },
+{ word: 'preschool', translation: 'pré-escola', icon: '👶', phonetic: 'príscul', example: 'My <strong>son</strong> is in <strong>preschool</strong>.', examplePt: 'Meu filho está na pré-escola.', categoryType: 'EDUCATION' },
+{ word: 'kindergarten', translation: 'jardim de infância', icon: '🧸', phonetic: 'kíndergartern', example: 'She learned to <strong>read</strong> in <strong>kindergarten</strong>.', examplePt: 'Ela aprendeu a ler no jardim de infância.', categoryType: 'EDUCATION' },
+{ word: 'elementary school', translation: 'ensino fundamental i', icon: '🍎', phonetic: 'eleméntari scul', example: 'I <strong>loved</strong> <strong>elementary school</strong>.', examplePt: 'Eu amava o Ensino Fundamental I.', categoryType: 'EDUCATION' },
+{ word: 'middle school', translation: 'ensino fundamental ii', icon: '🎒', phonetic: 'mídol scul', example: 'I <strong>studied</strong> <strong>algebra</strong> in middle school.', examplePt: 'Eu estudei álgebra no Ensino Fundamental II.', categoryType: 'EDUCATION' },
+{ word: 'high school', translation: 'ensino médio', icon: '🎒', phonetic: 'rái scul', example: 'She <strong>graduates</strong> from <strong>high school</strong> next year.', examplePt: 'Ela se forma no Ensino Médio no próximo ano.', categoryType: 'EDUCATION' },
+{ word: 'college', translation: 'faculdade/ensino superior', icon: '🎓', phonetic: 'cólidj', example: 'He is <strong>going</strong> to <strong>college</strong> to study art.', examplePt: 'Ele vai para a faculdade estudar arte.', categoryType: 'EDUCATION' },
+{ word: 'university', translation: 'universidade', icon: '🎓', phonetic: 'iunivérsiti', example: 'She <strong>studies</strong> <strong>law</strong> at the university.', examplePt: 'Ela estuda direito na universidade.', categoryType: 'EDUCATION' },
+{ word: 'campus', translation: 'campus', icon: '🌳', phonetic: 'kémpus', example: 'The university <strong>campus</strong> is <strong>huge</strong>.', examplePt: 'O campus da universidade é enorme.', categoryType: 'EDUCATION' },
+{ word: 'library', translation: 'biblioteca', icon: '🏛️', phonetic: 'laibréri', example: 'The <strong>library</strong> is <strong>quiet</strong>.', examplePt: 'A biblioteca é silenciosa.', categoryType: 'EDUCATION' },
+{ word: 'dormitory (dorm)', translation: 'dormitório/moradia estudantil', icon: '🛏️', phonetic: 'dórmitóri (dorm)', example: 'Most <strong>students</strong> live in a <strong>dormitory</strong>.', examplePt: 'A maioria dos estudantes mora em um dormitório.', categoryType: 'EDUCATION' },
+{ word: 'auditorium', translation: 'auditório', icon: '🎭', phonetic: 'auditórium', example: 'The <strong>play</strong> was held in the <strong>auditorium</strong>.', examplePt: 'A peça foi realizada no auditório.', categoryType: 'EDUCATION' },
+{ word: 'cafeteria', translation: 'cantina/refeitório', icon: '🍔', phonetic: 'cafetíria', example: 'We <strong>eat</strong> <strong>lunch</strong> in the cafeteria.', examplePt: 'Nós almoçamos na cantina.', categoryType: 'EDUCATION' },
+// MATERIAIS E OBJETOS
+{ word: 'book', translation: 'livro', icon: '📚', phonetic: 'búk', example: '<strong>Read</strong> the <strong>next</strong> chapter of the book.', examplePt: 'Leia o próximo capítulo do livro.', categoryType: 'EDUCATION' },
+{ word: 'textbook', translation: 'livro didático', icon: '📘', phonetic: 'téxt búk', example: 'Bring your <strong>math</strong> <strong>textbook</strong> to class.', examplePt: 'Traga seu livro didático de matemática para a aula.', categoryType: 'EDUCATION' },
+{ word: 'notebook', translation: 'caderno', icon: '📓', phonetic: 'noutbúk', example: '<strong>Write</strong> the <strong>notes</strong> in your notebook.', examplePt: 'Escreva as anotações no seu caderno.', categoryType: 'EDUCATION' },
+{ word: 'pen', translation: 'caneta', icon: '🖊️', phonetic: 'pén', example: 'Do you have a <strong>blue</strong> <strong>pen</strong>?', examplePt: 'Você tem uma caneta azul?', categoryType: 'EDUCATION' },
+{ word: 'pencil', translation: 'lápis', icon: '✏️', phonetic: 'pénsil', example: 'I need to <strong>sharpen</strong> my <strong>pencil</strong>.', examplePt: 'Eu preciso apontar meu lápis.', categoryType: 'EDUCATION' },
+{ word: 'paper', translation: 'papel', icon: '📄', phonetic: 'pêiper', example: '<strong>Hand</strong> me a <strong>sheet</strong> of paper.', examplePt: 'Me entregue uma folha de papel.', categoryType: 'EDUCATION' },
+{ word: 'backpack', translation: 'mochila', icon: '🎒', phonetic: 'békpak', example: 'My <strong>backpack</strong> is very <strong>heavy</strong>.', examplePt: 'Minha mochila está muito pesada.', categoryType: 'EDUCATION' },
+{ word: 'dictionary', translation: 'dicionário', icon: '📙', phonetic: 'díctionéri', example: '<strong>Look</strong> up the <strong>meaning</strong> in the dictionary.', examplePt: 'Procure o significado no dicionário.', categoryType: 'EDUCATION' },
+{ word: 'ruler', translation: 'régua', icon: '📏', phonetic: 'rúler', example: '<strong>Use</strong> a <strong>ruler</strong> to draw a straight line.', examplePt: 'Use uma régua para traçar uma linha reta.', categoryType: 'EDUCATION' },
+{ word: 'eraser', translation: 'borracha', icon: '⬜', phonetic: 'irêiser', example: 'I <strong>need</strong> an <strong>eraser</strong> to fix this mistake.', examplePt: 'Eu preciso de uma borracha para corrigir este erro.', categoryType: 'EDUCATION' },
+{ word: 'marker', translation: 'caneta/marcador', icon: '🖍️', phonetic: 'márker', example: 'Use a <strong>black</strong> <strong>marker</strong> for the poster.', examplePt: 'Use um marcador preto para o cartaz.', categoryType: 'EDUCATION' },
+{ word: 'scissors', translation: 'tesoura', icon: '✂️', phonetic: 'sízors', example: 'The <strong>child</strong> uses <strong>safety</strong> scissors.', examplePt: 'A criança usa tesoura sem ponta.', categoryType: 'EDUCATION' },
+{ word: 'glue', translation: 'cola', icon: '🧴', phonetic: 'glú', example: 'We <strong>need</strong> <strong>glue</strong> for the craft project.', examplePt: 'Nós precisamos de cola para o projeto de artesanato.', categoryType: 'EDUCATION' },
+{ word: 'chalk', translation: 'giz', icon: '🖍️', phonetic: 'tchók', example: 'The <strong>teacher</strong> wrote on the board with <strong>chalk</strong>.', examplePt: 'A professora escreveu no quadro com giz.', categoryType: 'EDUCATION' },
+{ word: 'globe', translation: 'globo terrestre', icon: '🌐', phonetic: 'glôub', example: 'The <strong>globe</strong> shows <strong>all</strong> the continents.', examplePt: 'O globo terrestre mostra todos os continentes.', categoryType: 'EDUCATION' },
+{ word: 'projector', translation: 'projetor', icon: '📽️', phonetic: 'prodjécto', example: 'The <strong>slides</strong> are shown on the <strong>projector</strong>.', examplePt: 'Os slides são mostrados no projetor.', categoryType: 'EDUCATION' },
+// AÇÕES E PROCESSOS
+{ word: 'study', translation: 'estudar', icon: '✍️', phonetic: 'stâdi', example: 'I <strong>need</strong> to <strong>study</strong> hard.', examplePt: 'Eu preciso estudar muito.', categoryType: 'EDUCATION' },
+{ word: 'learn', translation: 'aprender', icon: '🧠', phonetic: 'lêrn', example: 'We <strong>learn</strong> new <strong>things</strong> every day.', examplePt: 'Nós aprendemos coisas novas todos os dias.', categoryType: 'EDUCATION' },
+{ word: 'write', translation: 'escrever', icon: '✍️', phonetic: 'ráit', example: 'Can you <strong>write</strong> your <strong>name</strong>?', examplePt: 'Você pode escrever seu nome?', categoryType: 'EDUCATION' },
+{ word: 'read', translation: 'ler', icon: '👁️', phonetic: 'ríd', example: 'I like to <strong>read</strong> <strong>books</strong>.', examplePt: 'Eu gosto de ler livros.', categoryType: 'EDUCATION' },
+{ word: 'memorize', translation: 'memorizar', icon: '🤯', phonetic: 'mémorais', example: 'You must <strong>memorize</strong> the <strong>poem</strong>.', examplePt: 'Você deve memorizar o poema.', categoryType: 'EDUCATION' },
+{ word: 'discuss', translation: 'discutir/debater', icon: '🗣️', phonetic: 'discâss', example: 'We <strong>need</strong> to <strong>discuss</strong> the topic.', examplePt: 'Nós precisamos discutir o tópico.', categoryType: 'EDUCATION' },
+{ word: 'attend', translation: 'frequentar/participar', icon: '✔️', phonetic: 'aténd', example: 'You must <strong>attend</strong> all <strong>lectures</strong>.', examplePt: 'Você deve frequentar todas as palestras.', categoryType: 'EDUCATION' },
+{ word: 'graduate', translation: 'formar-se', icon: '👩‍🎓', phonetic: 'grádjueit', example: 'She will <strong>graduate</strong> next <strong>May</strong>.', examplePt: 'Ela vai se formar em maio próximo.', categoryType: 'EDUCATION' },
+{ word: 'teach', translation: 'ensinar', icon: '🎓', phonetic: 'títch', example: 'He will <strong>teach</strong> us <strong>math</strong>.', examplePt: 'Ele vai nos ensinar matemática.', categoryType: 'EDUCATION' },
+{ word: 'submit', translation: 'entregar (trabalho)', icon: '📤', phonetic: 'sâbmít', example: 'Please <strong>submit</strong> your <strong>essay</strong> online.', examplePt: 'Por favor, entregue seu ensaio online.', categoryType: 'EDUCATION' },
+{ word: 'review', translation: 'revisar', icon: '🔄', phonetic: 'rivíu', example: 'Let\'s <strong>review</strong> the <strong>chapter</strong> before the test.', examplePt: 'Vamos revisar o capítulo antes da prova.', categoryType: 'EDUCATION' },
+{ word: 'enroll', translation: 'matricular-se', icon: '🆔', phonetic: 'enrôl', example: 'You need to <strong>enroll</strong> before the <strong>deadline</strong>.', examplePt: 'Você precisa se matricular antes do prazo.', categoryType: 'EDUCATION' },
+{ word: 'research', translation: 'pesquisar', icon: '🔬', phonetic: 'rísêrtch', example: 'I am doing <strong>research</strong> for my <strong>thesis</strong>.', examplePt: 'Eu estou fazendo pesquisa para minha tese.', categoryType: 'EDUCATION' },
+{ word: 'present', translation: 'apresentar', icon: '🎤', phonetic: 'prezént', example: 'Students will <strong>present</strong> their <strong>projects</strong>.', examplePt: 'Os alunos vão apresentar seus projetos.', categoryType: 'EDUCATION' },
+{ word: 'explain', translation: 'explicar', icon: '💡', phonetic: 'explêin', example: 'Can you <strong>explain</strong> this <strong>concept</strong>?', examplePt: 'Você pode explicar este conceito?', categoryType: 'EDUCATION' },
+{ word: 'question', translation: 'perguntar/questão', icon: '❓', phonetic: 'cuestchân', example: 'The <strong>student</strong> raised a <strong>question</strong>.', examplePt: 'O aluno levantou uma questão.', categoryType: 'EDUCATION' },
+{ word: 'solve', translation: 'resolver', icon: '🧩', phonetic: 'sólv', example: 'We need to <strong>solve</strong> this <strong>math</strong> problem.', examplePt: 'Nós precisamos resolver este problema de matemática.', categoryType: 'EDUCATION' },
+{ word: 'assist', translation: 'assistir/apoiar', icon: '🤝', phonetic: 'assíst', example: 'The <strong>tutor</strong> will <strong>assist</strong> you.', examplePt: 'O tutor vai te apoiar.', categoryType: 'EDUCATION' },
+{ word: 'take notes', translation: 'fazer anotações', icon: '✍️', phonetic: 'teik nôuts', example: 'Be <strong>sure</strong> to <strong>take notes</strong> during the lecture.', examplePt: 'Certifique-se de fazer anotações durante a palestra.', categoryType: 'EDUCATION' },
+// AVALIAÇÃO E TERMOS ACADÊMICOS
+{ word: 'class', translation: 'aula/disciplina/turma', icon: '🧑‍🤝‍🧑', phonetic: 'cléss', example: 'I have <strong>history</strong> <strong>class</strong> now.', examplePt: 'Eu tenho aula de história agora.', categoryType: 'EDUCATION' },
+{ word: 'subject', translation: 'matéria/disciplina', icon: '📎', phonetic: 'sâbdjéct', example: 'My <strong>favorite</strong> <strong>subject</strong> is science.', examplePt: 'Minha matéria favorita é ciência.', categoryType: 'EDUCATION' },
+{ word: 'lesson', translation: 'lição', icon: '📖', phonetic: 'léssan', example: 'Today\'s <strong>lesson</strong> is about <strong>grammar</strong>.', examplePt: 'A lição de hoje é sobre gramática.', categoryType: 'EDUCATION' },
+{ word: 'homework', translation: 'tarefa de casa', icon: '📝', phonetic: 'róumuérk', example: 'Don\'t forget your <strong>homework</strong> <strong>tonight</strong>.', examplePt: 'Não se esqueça da sua tarefa de casa.', categoryType: 'EDUCATION' },
+{ word: 'test', translation: 'prova/teste', icon: '💯', phonetic: 'tést', example: 'We have a <strong>big</strong> <strong>test</strong> tomorrow.', examplePt: 'Nós temos uma grande prova amanhã.', categoryType: 'EDUCATION' },
+{ word: 'exam', translation: 'exame/prova final', icon: '📜', phonetic: 'exém', example: 'The <strong>final</strong> <strong>exam</strong> is next week.', examplePt: 'O exame final é na próxima semana.', categoryType: 'EDUCATION' },
+{ word: 'quiz', translation: 'questionário/teste rápido', icon: '🧠', phonetic: 'cuíz', example: 'We have a <strong>short</strong> <strong>quiz</strong> on Friday.', examplePt: 'Nós temos um questionário rápido na sexta-feira.', categoryType: 'EDUCATION' },
+{ word: 'grade', translation: 'nota/conceito', icon: 'A+', phonetic: 'grêid', example: 'What <strong>grade</strong> did you <strong>get</strong>?', examplePt: 'Que nota você tirou?', categoryType: 'EDUCATION' },
+{ word: 'gpa', translation: 'média de notas (gpa)', icon: '📊', phonetic: 'dji pí êi', example: 'A <strong>high</strong> <strong>GPA</strong> is required for the scholarship.', examplePt: 'Uma média de notas alta é exigida para a bolsa.', categoryType: 'EDUCATION' },
+{ word: 'assignment', translation: 'trabalho/tarefa', icon: '📃', phonetic: 'asaimment', example: 'The <strong>assignment</strong> is <strong>due</strong> next Monday.', examplePt: 'O trabalho é para a próxima segunda-feira.', categoryType: 'EDUCATION' },
+{ word: 'essay', translation: 'ensaio/redação', icon: '✍️', phonetic: 'éssei', example: 'I have to <strong>write</strong> a <strong>3000-word</strong> essay.', examplePt: 'Eu tenho que escrever uma redação de 3000 palavras.', categoryType: 'EDUCATION' },
+{ word: 'report', translation: 'relatório', icon: '📄', phonetic: 'ripórt', example: 'Please <strong>submit</strong> your <strong>lab</strong> report.', examplePt: 'Por favor, entregue seu relatório de laboratório.', categoryType: 'EDUCATION' },
+{ word: 'midterm', translation: 'prova de meio de semestre', icon: '🗓️', phonetic: 'mídtêrm', example: 'The <strong>midterm</strong> <strong>exam</strong> is very important.', examplePt: 'A prova de meio de semestre é muito importante.', categoryType: 'EDUCATION' },
+{ word: 'semester', translation: 'semestre', icon: '🗓️', phonetic: 'seméster', example: 'This <strong>semester</strong> <strong>starts</strong> in August.', examplePt: 'Este semestre começa em agosto.', categoryType: 'EDUCATION' },
+{ word: 'diploma', translation: 'diploma', icon: '📜', phonetic: 'diplôuma', example: 'He <strong>received</strong> his <strong>diploma</strong> after graduation.', examplePt: 'Ele recebeu seu diploma após a formatura.', categoryType: 'EDUCATION' },
+{ word: 'degree', translation: 'grau acadêmico', icon: '🎓', phonetic: 'digrí', example: 'She has a <strong>Master\'s</strong> <strong>degree</strong>.', examplePt: 'Ela tem um grau de Mestre.', categoryType: 'EDUCATION' },
+{ word: 'scholarship', translation: 'bolsa de estudo', icon: '💰', phonetic: 'scólarship', example: 'He <strong>won</strong> a <strong>full</strong> scholarship.', examplePt: 'Ele ganhou uma bolsa de estudo integral.', categoryType: 'EDUCATION' },
+{ word: 'thesis', translation: 'tese/monografia', icon: '📝', phonetic: 'thísis', example: '<strong>Writing</strong> a <strong>thesis</strong> takes a long time.', examplePt: 'Escrever uma tese leva muito tempo.', categoryType: 'EDUCATION' },
+{ word: 'curriculum', translation: 'currículo', icon: '📃', phonetic: 'currícúlum', example: 'They are <strong>updating</strong> the school <strong>curriculum</strong>.', examplePt: 'Eles estão atualizando o currículo escolar.', categoryType: 'EDUCATION' },
+{ word: 'internship', translation: 'estágio', icon: '💼', phonetic: 'intêrnship', example: 'I am <strong>looking</strong> for an <strong>internship</strong> this summer.', examplePt: 'Eu estou procurando por um estágio neste verão.', categoryType: 'EDUCATION' },
+{ word: 'alumni', translation: 'ex-alunos', icon: '🧑‍🤝‍🧑', phonetic: 'alumnai', example: 'The <strong>alumni</strong> <strong>association</strong> organizes events.', examplePt: 'A associação de ex-alunos organiza eventos.', categoryType: 'EDUCATION' }
+                ]
+            },
+			
+			
             work: {
                 title: 'TRABALHO (WORK)',
                 description: 'Vocabulário sobre Profissões e Ambiente de Trabalho',
@@ -2840,53 +2683,52 @@ if (!isAlphabet) {
                 description: 'Vocabulário sobre Países e Nacionalidades',
                 words: [
                     // **América do Sul**
-{ word: 'Brazil', translation: 'Brasil', icon: '🇧🇷', phonetic: 'bruzíl', example: '<strong>Brazil</strong> is famous for <strong>Brazilian</strong> coffee', examplePt: 'O Brasil é famoso pelo café brasileiro', categoryType: 'COUNTRIES' },
-{ word: 'argentina', translation: 'Argentina', icon: '🇦🇷', phonetic: 'ardjentína', example: '<strong>Argentina</strong> is known for <strong>Argentine</strong> beef', examplePt: 'A Argentina é conhecida pela carne argentina', categoryType: 'COUNTRIES' },
-{ word: 'chile', translation: 'Chile', icon: '🇨🇱', phonetic: 'tchíli', example: '<strong>Chile</strong> produces excellent <strong>Chilean</strong> wine', examplePt: 'O Chile produz excelente vinho chileno', categoryType: 'COUNTRIES' },
-{ word: 'colombia', translation: 'Colômbia', icon: '🇨🇴', phonetic: 'colâmbiâ', example: '<strong>Colombia</strong> produces excellent <strong>Colombian</strong> coffee', examplePt: 'Colômbia produz café colombiano excelente', categoryType: 'COUNTRIES' },
-{ word: 'peru', translation: 'Peru', icon: '🇵🇪', phonetic: 'perú', example: '<strong>Peru</strong> has ancient <strong>Peruvian</strong> ruins', examplePt: 'Peru tem ruínas peruanas antigas', categoryType: 'COUNTRIES' },
-{ word: 'venezuela', translation: 'Venezuela', icon: '🇻🇪', phonetic: 'venezuêla', example: '<strong>Venezuela</strong> has rich <strong>Venezuelan</strong> culture', examplePt: 'Venezuela tem cultura venezuelana rica', categoryType: 'COUNTRIES' },
-{ word: 'ecuador', translation: 'Equador', icon: '🇪🇨', phonetic: 'ecuedór', example: '<strong>Ecuador</strong> has diverse <strong>Ecuadorian</strong> wildlife', examplePt: 'Equador tem vida selvagem equatoriana diversa', categoryType: 'COUNTRIES' },
-{ word: 'bolivia', translation: 'Bolívia', icon: '🇧🇴', phonetic: 'bolívia', example: '<strong>Bolivia</strong> has traditional <strong>Bolivian</strong> music', examplePt: 'Bolívia tem música boliviana tradicional', categoryType: 'COUNTRIES' },
-{ word: 'uruguay', translation: 'Uruguai', icon: '🇺🇾', phonetic: 'úruaguai', example: '<strong>Uruguay</strong> has peaceful <strong>Uruguayan</strong> beaches', examplePt: 'Uruguai tem praias uruguaias pacíficas', categoryType: 'COUNTRIES' },
-{ word: 'paraguay', translation: 'Paraguai', icon: '🇵🇾', phonetic: 'páraguai', example: '<strong>Paraguay</strong> is known for <strong>Paraguayan</strong> craftsmanship', examplePt: 'O Paraguai é conhecido pelo artesanato paraguaio', categoryType: 'COUNTRIES' },
+{ word: 'Brazil', Translation: 'Brasil', icon: '🇧🇷', phonetic: 'bruzíl', example: '<strong>Brazil</strong> is famous for <strong>Brazilian</strong> coffee', examplePt: 'O Brasil é famoso pelo café brasileiro', categoryType: 'COUNTRIES' },
+{ word: 'Argentina', Translation: 'Argentina', icon: '🇦🇷', phonetic: 'ardjentína', example: '<strong>Argentina</strong> is known for <strong>Argentine</strong> beef', examplePt: 'A Argentina é conhecida pela carne argentina', categoryType: 'COUNTRIES' },
+{ word: 'Chile', Translation: 'Chile', icon: '🇨🇱', phonetic: 'tchíli', example: '<strong>Chile</strong> produces excellent <strong>Chilean</strong> wine', examplePt: 'O Chile produz excelente vinho chileno', categoryType: 'COUNTRIES' },
+{ word: 'Colombia', Translation: 'Colômbia', icon: '🇨🇴', phonetic: 'colâmbiâ', example: '<strong>Colombia</strong> produces excellent <strong>Colombian</strong> coffee', examplePt: 'Colômbia produz café colombiano excelente', categoryType: 'COUNTRIES' },
+{ word: 'Peru', Translation: 'Peru', icon: '🇵🇪', phonetic: 'perú', example: '<strong>Peru</strong> has ancient <strong>Peruvian</strong> ruins', examplePt: 'Peru tem ruínas peruanas antigas', categoryType: 'COUNTRIES' },
+{ word: 'Venezuela', Translation: 'Venezuela', icon: '🇻🇪', phonetic: 'venezuêla', example: '<strong>Venezuela</strong> has rich <strong>Venezuelan</strong> culture', examplePt: 'Venezuela tem cultura venezuelana rica', categoryType: 'COUNTRIES' },
+{ word: 'Ecuador', Translation: 'Equador', icon: '🇪🇨', phonetic: 'ecuedór', example: '<strong>Ecuador</strong> has diverse <strong>Ecuadorian</strong> wildlife', examplePt: 'Equador tem vida selvagem equatoriana diversa', categoryType: 'COUNTRIES' },
+{ word: 'Bolivia', Translation: 'Bolívia', icon: '🇧🇴', phonetic: 'bolívia', example: '<strong>Bolivia</strong> has traditional <strong>Bolivian</strong> music', examplePt: 'Bolívia tem música boliviana tradicional', categoryType: 'COUNTRIES' },
+{ word: 'Uruguay', Translation: 'Uruguai', icon: '🇺🇾', phonetic: 'úruaguai', example: '<strong>Uruguay</strong> has peaceful <strong>Uruguayan</strong> beaches', examplePt: 'Uruguai tem praias uruguaias pacíficas', categoryType: 'COUNTRIES' },
+{ word: 'Paraguay', Translation: 'Paraguai', icon: '🇵🇾', phonetic: 'páraguai', example: '<strong>Paraguay</strong> is known for <strong>Paraguayan</strong> craftsmanship', examplePt: 'O Paraguai é conhecido pelo artesanato paraguaio', categoryType: 'COUNTRIES' },
 
 // **América do Norte e Central**
-{ word: 'united states', translation: 'Estados Unidos', icon: '🇺🇸', phonetic: 'unáited stêits', example: 'The <strong>United States</strong> uses the <strong>American</strong> dollar', examplePt: 'Os Estados Unidos usam o dólar americano', categoryType: 'COUNTRIES' },
-{ word: 'canada', translation: 'Canadá', icon: '🇨🇦', phonetic: 'cênâdâ', example: '<strong>Canada</strong> has beautiful <strong>Canadian</strong> landscapes', examplePt: 'O Canadá tem belas paisagens canadenses', categoryType: 'COUNTRIES' },
-{ word: 'mexico', translation: 'México', icon: '🇲🇽', phonetic: 'méxicou', example: '<strong>Mexico</strong> is known for its <strong>Mexican</strong> food', examplePt: 'O México é conhecido por sua comida mexicana', categoryType: 'COUNTRIES' },
-{ word: 'cuba', translation: 'Cuba', icon: '🇨🇺', phonetic: 'ciúbâ', example: '<strong>Cuba</strong> is famous for <strong>Cuban</strong> cigars', examplePt: 'Cuba é famosa pelos charutos cubanos', categoryType: 'COUNTRIES' },
+{ word: 'United States', translation: 'Estados Unidos', icon: '🇺🇸', phonetic: 'unáited stêits', example: 'The <strong>United States</strong> uses the <strong>American</strong> dollar', examplePt: 'Os Estados Unidos usam o dólar americano', categoryType: 'COUNTRIES' },
+{ word: 'Canada', Translation: 'Canadá', icon: '🇨🇦', phonetic: 'cênâdâ', example: '<strong>Canada</strong> has beautiful <strong>Canadian</strong> landscapes', examplePt: 'O Canadá tem belas paisagens canadenses', categoryType: 'COUNTRIES' },
+{ word: 'Mexico', Translation: 'México', icon: '🇲🇽', phonetic: 'méxicou', example: '<strong>Mexico</strong> is known for its <strong>Mexican</strong> food', examplePt: 'O México é conhecido por sua comida mexicana', categoryType: 'COUNTRIES' },
+{ word: 'Cuba', Translation: 'Cuba', icon: '🇨🇺', phonetic: 'ciúbâ', example: '<strong>Cuba</strong> is famous for <strong>Cuban</strong> cigars', examplePt: 'Cuba é famosa pelos charutos cubanos', categoryType: 'COUNTRIES' },
 
 // **Europa**
-{ word: 'united kingdom', translation: 'Reino Unido', icon: '🇬🇧', phonetic: 'unáited quíndon', example: 'The <strong>United Kingdom</strong> has a rich <strong>British</strong> history', examplePt: 'O Reino Unido tem uma história britânica rica', categoryType: 'COUNTRIES' },
-{ word: 'france', translation: 'França', icon: '🇫🇷', phonetic: 'frênce', example: '<strong>France</strong> is known for <strong>French</strong> wine', examplePt: 'A França é conhecida pelo vinho francês', categoryType: 'COUNTRIES' },
-{ word: 'germany', translation: 'Alemanha', icon: '🇩🇪', phonetic: 'djêrmâni', example: '<strong>Germany</strong> makes excellent <strong>German</strong> cars', examplePt: 'A Alemanha fabrica excelentes carros alemães', categoryType: 'COUNTRIES' },
-{ word: 'italy', translation: 'Itália', icon: '🇮🇹', phonetic: 'ítali', example: '<strong>Italy</strong> has delicious <strong>Italian</strong> pasta', examplePt: 'A Itália tem deliciosa massa italiana', categoryType: 'COUNTRIES' },
-{ word: 'spain', translation: 'Espanha', icon: '🇪🇸', phonetic: 'spêin', example: '<strong>Spain</strong> is famous for <strong>Spanish</strong> flamenco', examplePt: 'A Espanha é famosa pelo flamenco espanhol', categoryType: 'COUNTRIES' },
-{ word: 'portugal', translation: 'Portugal', icon: '🇵🇹', phonetic: 'pórtugal', example: '<strong>Portugal</strong> has wonderful <strong>Portuguese</strong> beaches', examplePt: 'Portugal tem praias portuguesas maravilhosas', categoryType: 'COUNTRIES' },
-{ word: 'greece', translation: 'Grécia', icon: '🇬🇷', phonetic: 'gríis', example: '<strong>Greece</strong> has an ancient <strong>Greek</strong> history', examplePt: 'A Grécia tem uma história grega antiga', categoryType: 'COUNTRIES' },
-{ word: 'russia', translation: 'Rússia', icon: '🇷🇺', phonetic: 'râshâ', example: '<strong>Russia</strong> has a cold <strong>Russian</strong> winter', examplePt: 'A Rússia tem um inverno russo frio', categoryType: 'COUNTRIES' },
+{ word: 'United Kingdom', translation: 'Reino Unido', icon: '🇬🇧', phonetic: 'unáited quíndon', example: 'The <strong>United Kingdom</strong> has a rich <strong>British</strong> history', examplePt: 'O Reino Unido tem uma história britânica rica', categoryType: 'COUNTRIES' },
+{ word: 'France', Translation: 'França', icon: '🇫🇷', phonetic: 'frênce', example: '<strong>France</strong> is known for <strong>French</strong> wine', examplePt: 'A França é conhecida pelo vinho francês', categoryType: 'COUNTRIES' },
+{ word: 'Germany', Translation: 'Alemanha', icon: '🇩🇪', phonetic: 'djêrmâni', example: '<strong>Germany</strong> makes excellent <strong>German</strong> cars', examplePt: 'A Alemanha fabrica excelentes carros alemães', categoryType: 'COUNTRIES' },
+{ word: 'Italy', Translation: 'Itália', icon: '🇮🇹', phonetic: 'ítali', example: '<strong>Italy</strong> has delicious <strong>Italian</strong> pasta', examplePt: 'A Itália tem deliciosa massa italiana', categoryType: 'COUNTRIES' },
+{ word: 'Spain', Translation: 'Espanha', icon: '🇪🇸', phonetic: 'spêin', example: '<strong>Spain</strong> is famous for <strong>Spanish</strong> flamenco', examplePt: 'A Espanha é famosa pelo flamenco espanhol', categoryType: 'COUNTRIES' },
+{ word: 'Portugal', Translation: 'Portugal', icon: '🇵🇹', phonetic: 'pórtugal', example: '<strong>Portugal</strong> has wonderful <strong>Portuguese</strong> beaches', examplePt: 'Portugal tem praias portuguesas maravilhosas', categoryType: 'COUNTRIES' },
+{ word: 'Greece', Translation: 'Grécia', icon: '🇬🇷', phonetic: 'gríis', example: '<strong>Greece</strong> has an ancient <strong>Greek</strong> history', examplePt: 'A Grécia tem uma história grega antiga', categoryType: 'COUNTRIES' },
+{ word: 'Russia', Translation: 'Rússia', icon: '🇷🇺', phonetic: 'râshâ', example: '<strong>Russia</strong> has a cold <strong>Russian</strong> winter', examplePt: 'A Rússia tem um inverno russo frio', categoryType: 'COUNTRIES' },
 
 // **Ásia e Oceania**
-{ word: 'china', translation: 'China', icon: '🇨🇳', phonetic: 'tcháina', example: '<strong>China</strong> is a big <strong>Chinese</strong> economy', examplePt: 'A China é uma grande economia chinesa', categoryType: 'COUNTRIES' },
-{ word: 'japan', translation: 'Japão', icon: '🇯🇵', phonetic: 'djepén', example: '<strong>Japan</strong> is known for <strong>Japanese</strong> technology', examplePt: 'O Japão é conhecido pela tecnologia japonesa', categoryType: 'COUNTRIES' },
-{ word: 'south korea', translation: 'Coreia do Sul', icon: '🇰🇷', phonetic: 'sáuf coría', example: '<strong>South Korea</strong> has a strong <strong>Korean</strong> culture', examplePt: 'A Coreia do Sul tem uma cultura coreana forte', categoryType: 'COUNTRIES' },
-{ word: 'india', translation: 'Índia', icon: '🇮🇳', phonetic: 'índiâ', example: '<strong>India</strong> has a vast <strong>Indian</strong> population', examplePt: 'A Índia tem uma vasta população indiana', categoryType: 'COUNTRIES' },
-{ word: 'australia', translation: 'Austrália', icon: '🇦🇺', phonetic: 'ostruêliâ', example: '<strong>Australia</strong> is home to <strong>Australian</strong> kangaroos', examplePt: 'A Austrália é lar de cangurus australianos', categoryType: 'COUNTRIES' },
-{ word: 'new zealand', translation: 'Nova Zelândia', icon: '🇳🇿', phonetic: 'niú zíland', example: '<strong>New Zealand</strong> has beautiful <strong>New Zealand</strong> mountains', examplePt: 'A Nova Zelândia tem belas montanhas neozelandesas', categoryType: 'COUNTRIES' },
+{ word: 'China', Translation: 'China', icon: '🇨🇳', phonetic: 'tcháina', example: '<strong>China</strong> is a big <strong>Chinese</strong> economy', examplePt: 'A China é uma grande economia chinesa', categoryType: 'COUNTRIES' },
+{ word: 'Japan', Translation: 'Japão', icon: '🇯🇵', phonetic: 'djepén', example: '<strong>Japan</strong> is known for <strong>Japanese</strong> technology', examplePt: 'O Japão é conhecido pela tecnologia japonesa', categoryType: 'COUNTRIES' },
+{ word: 'South Korea', translation: 'Coreia do Sul', icon: '🇰🇷', phonetic: 'sáuf coría', example: '<strong>South Korea</strong> has a strong <strong>Korean</strong> culture', examplePt: 'A Coreia do Sul tem uma cultura coreana forte', categoryType: 'COUNTRIES' },
+{ word: 'India', Translation: 'Índia', icon: '🇮🇳', phonetic: 'índiâ', example: '<strong>India</strong> has a vast <strong>Indian</strong> population', examplePt: 'A Índia tem uma vasta população indiana', categoryType: 'COUNTRIES' },
+{ word: 'Australia', Translation: 'Austrália', icon: '🇦🇺', phonetic: 'ostruêliâ', example: '<strong>Australia</strong> is home to <strong>Australian</strong> kangaroos', examplePt: 'A Austrália é lar de cangurus australianos', categoryType: 'COUNTRIES' },
+{ word: 'New Zealand', translation: 'Nova Zelândia', icon: '🇳🇿', phonetic: 'niú zíland', example: '<strong>New Zealand</strong> has beautiful <strong>New Zealand</strong> mountains', examplePt: 'A Nova Zelândia tem belas montanhas neozelandesas', categoryType: 'COUNTRIES' },
 
 // **África**
-// **África**
-{ word: 'south africa', translation: 'África do Sul', icon: '🇿🇦', phonetic: 'sáuf áfricâ', example: '<strong>South Africa</strong> has a diverse <strong>South African</strong> landscape', examplePt: 'A África do Sul tem uma paisagem sul-africana diversa', categoryType: 'COUNTRIES' },
-{ word: 'egypt', translation: 'Egito', icon: '🇪🇬', phonetic: 'ídjipt', example: '<strong>Egypt</strong> is famous for <strong>Egyptian</strong> pyramids', examplePt: 'O Egito é famoso pelas pirâmides egípcias', categoryType: 'COUNTRIES' },
-{ word: 'nigeria', translation: 'Nigéria', icon: '🇳🇬', phonetic: 'naidjíriâ', example: 'Nigeria is a <strong>large</strong> <strong>West</strong> African country.', examplePt: 'A Nigéria é um grande país da África Ocidental.', categoryType: 'COUNTRIES' },
-{ word: 'kenya', translation: 'Quênia', icon: '🇰🇪', phonetic: 'kêniâ', example: 'Kenya is known for its <strong>safaris</strong> and <strong>wildlife</strong>.', examplePt: 'O Quênia é conhecido por seus safáris e vida selvagem.', categoryType: 'COUNTRIES' },
-{ word: 'morocco', translation: 'Marrocos', icon: '🇲🇦', phonetic: 'morôcou', example: 'Morocco has <strong>beautiful</strong> <strong>Moroccan</strong> architecture.', examplePt: 'Marrocos tem uma bela arquitetura marroquina.', categoryType: 'COUNTRIES' },
-{ word: 'ghana', translation: 'Gana', icon: '🇬🇭', phonetic: 'gánâ', example: 'Ghana is a major <strong>producer</strong> of <strong>cocoa</strong>.', examplePt: 'Gana é um grande produtor de cacau.', categoryType: 'COUNTRIES' },
-{ word: 'tanzania', translation: 'Tanzânia', icon: '🇹🇿', phonetic: 'tenzâníâ', example: 'Tanzania is home to <strong>Mount</strong> <strong>Kilimanjaro</strong>.', examplePt: 'A Tanzânia é o lar do Monte Kilimanjaro.', categoryType: 'COUNTRIES' },
-{ word: 'algeria', translation: 'Argélia', icon: '🇩🇿', phonetic: 'aldjíriâ', example: 'Algeria is the <strong>largest</strong> <strong>country</strong> in Africa.', examplePt: 'A Argélia é o maior país da África.', categoryType: 'COUNTRIES' },
-{ word: 'ethiopia', translation: 'Etiópia', icon: '🇪🇹', phonetic: 'efiópiâ', example: 'Ethiopia has a long <strong>ancient</strong> <strong>history</strong>.', examplePt: 'A Etiópia tem uma longa história antiga.', categoryType: 'COUNTRIES' },
-{ word: 'madagascar', translation: 'Madagascar', icon: '🇲🇬', phonetic: 'madagáskar', example: 'Madagascar is famous for its <strong>unique</strong> <strong>lemurs</strong>.', examplePt: 'Madagascar é famosa por seus lêmures exclusivos.', categoryType: 'COUNTRIES' }
+{ word: 'South Africa', translation: 'África do Sul', icon: '🇿🇦', phonetic: 'sáuf áfricâ', example: '<strong>South Africa</strong> has a diverse <strong>South African</strong> landscape', examplePt: 'A África do Sul tem uma paisagem sul-africana diversa', categoryType: 'COUNTRIES' },
+{ word: 'Egypt', Translation: 'Egito', icon: '🇪🇬', phonetic: 'ídjipt', example: '<strong>Egypt</strong> is famous for <strong>Egyptian</strong> pyramids', examplePt: 'O Egito é famoso pelas pirâmides egípcias', categoryType: 'COUNTRIES' },
+{ word: 'Nigeria', Translation: 'Nigéria', icon: '🇳🇬', phonetic: 'naidjíriâ', example: 'Nigeria is a <strong>large</strong> <strong>West</strong> African country.', examplePt: 'A Nigéria é um grande país da África Ocidental.', categoryType: 'COUNTRIES' },
+{ word: 'Kenya', Translation: 'Quênia', icon: '🇰🇪', phonetic: 'kêniâ', example: 'Kenya is known for its <strong>safaris</strong> and <strong>wildlife</strong>.', examplePt: 'O Quênia é conhecido por seus safáris e vida selvagem.', categoryType: 'COUNTRIES' },
+{ word: 'Morocco', Translation: 'Marrocos', icon: '🇲🇦', phonetic: 'morôcou', example: 'Morocco has <strong>beautiful</strong> <strong>Moroccan</strong> architecture.', examplePt: 'Marrocos tem uma bela arquitetura marroquina.', categoryType: 'COUNTRIES' },
+{ word: 'Ghana', Translation: 'Gana', icon: '🇬🇭', phonetic: 'gánâ', example: 'Ghana is a major <strong>producer</strong> of <strong>cocoa</strong>.', examplePt: 'Gana é um grande produtor de cacau.', categoryType: 'COUNTRIES' },
+{ word: 'Tanzania', Translation: 'Tanzânia', icon: '🇹🇿', phonetic: 'tenzâníâ', example: 'Tanzania is home to <strong>Mount</strong> <strong>Kilimanjaro</strong>.', examplePt: 'A Tanzânia é o lar do Monte Kilimanjaro.', categoryType: 'COUNTRIES' },
+{ word: 'Algeria', Translation: 'Argélia', icon: '🇩🇿', phonetic: 'aldjíriâ', example: 'Algeria is the <strong>largest</strong> <strong>country</strong> in Africa.', examplePt: 'A Argélia é o maior país da África.', categoryType: 'COUNTRIES' },
+{ word: 'Ethiopia', Translation: 'Etiópia', icon: '🇪🇹', phonetic: 'efiópiâ', example: 'Ethiopia has a long <strong>ancient</strong> <strong>history</strong>.', examplePt: 'A Etiópia tem uma longa história antiga.', categoryType: 'COUNTRIES' },
+{ word: 'Madagascar', Translation: 'Madagascar', icon: '🇲🇬', phonetic: 'madagáskar', example: 'Madagascar is famous for its <strong>unique</strong> <strong>lemurs</strong>.', examplePt: 'Madagascar é famosa por seus lêmures exclusivos.', categoryType: 'COUNTRIES' }
 
                 ]
             },
@@ -3552,6 +3394,104 @@ if (!isAlphabet) {
 { word: 'winter', translation: 'inverno', icon: '☃️', phonetic: 'uintâr', example: 'It gets very <strong>dark</strong> early in <strong>winter</strong>.', examplePt: 'Escurece muito cedo no inverno.', categoryType: 'WEATHER' }
                 ]
             },
+			
+			time: {
+                title: 'TEMPO (TIME)',
+                description: 'Vocabulário essencial sobre horas, dias e momentos',
+                words: [
+                    { word: 'time', translation: 'Tempo/Hora', icon: '⏰', phonetic: 'taíme', example: 'What <strong>time</strong> is <strong>it?</strong>', examplePt: 'Que horas são?', categoryType: 'TIME' },
+{ word: 'hour', translation: 'Hora', icon: '⏳', phonetic: 'áuer', example: 'I need <strong>one</strong> <strong>hour</strong> to finish this.', examplePt: 'Eu preciso de uma hora para terminar isto.', categoryType: 'TIME' },
+{ word: 'minute', translation: 'Minuto', icon: '⏳', phonetic: 'mínit', example: 'I\'ll be <strong>ready</strong> in five <strong>minute</strong>s.', examplePt: 'Eu estarei pronto em cinco minutos.', categoryType: 'TIME' },
+{ word: 'second', translation: 'Segundo', icon: '⏱️', phonetic: 'sécond', example: 'Wait just <strong>one</strong> <strong>second</strong>.', examplePt: 'Espere apenas um segundo.', categoryType: 'TIME' },
+{ word: 'o\'clock', translation: 'Em ponto', icon: '🕛', phonetic: 'ou clók', example: 'It\'s <strong>seven</strong> <strong>o\'clock</strong>.', examplePt: 'São sete em ponto.', categoryType: 'TIME' },
+{ word: 'half past', translation: 'Meia hora depois', icon: '🕡', phonetic: 'ráf pěst', example: 'It\'s <strong>half past</strong> <strong>six</strong>.', examplePt: 'São seis e meia (30 minutos depois).', categoryType: 'TIME' },
+{ word: 'quarter to', translation: 'Quinze minutos para', icon: '🕦', phonetic: 'cúarter tu', example: 'It\'s <strong>quarter to</strong> <strong>eight</strong>.', examplePt: 'Faltam 15 minutos para as oito.', categoryType: 'TIME' },
+{ word: 'quarter past', translation: 'Quinze minutos depois', icon: '🕧', phonetic: 'cúarter pěst', example: 'It\'s <strong>quarter past</strong> <strong>twelve</strong>.', examplePt: 'São doze e quinze (15 minutos depois).', categoryType: 'TIME' },
+{ word: 'day', translation: 'Dia', icon: '☀️', phonetic: 'dêi', example: 'It was a <strong>long</strong> <strong>day</strong>.', examplePt: 'Foi um longo dia.', categoryType: 'TIME' },
+{ word: 'week', translation: 'Semana', icon: '📅', phonetic: 'uík', example: 'I will see you <strong>next</strong> <strong>week</strong>.', examplePt: 'Eu te vejo na próxima semana.', categoryType: 'TIME' },
+{ word: 'month', translation: 'Mês', icon: '🗓️', phonetic: 'mânt', example: 'January is the <strong>first</strong> <strong>month</strong> of the year.', examplePt: 'Janeiro é o primeiro mês do ano.', categoryType: 'TIME' },
+{ word: 'year', translation: 'Ano', icon: '🎉', phonetic: 'iar', example: 'This has been a <strong>great</strong> <strong>year</strong>.', examplePt: 'Este tem sido um ótimo ano.', categoryType: 'TIME' },
+{ word: 'morning', translation: 'Manhã', icon: '🌅', phonetic: 'mórnin', example: 'I wake up <strong>early</strong> every <strong>morning</strong>.', examplePt: 'Eu acordo cedo toda manhã.', categoryType: 'TIME' },
+{ word: 'afternoon', translation: 'Tarde', icon: '☀️', phonetic: 'afternun', example: 'I have a <strong>meeting</strong> this <strong>afternoon</strong>.', examplePt: 'Eu tenho uma reunião nesta tarde.', categoryType: 'TIME' },
+{ word: 'evening', translation: 'Noite (Início)', icon: '🌃', phonetic: 'ívnin', example: 'We\'ll have <strong>dinner</strong> this <strong>evening</strong>.', examplePt: 'Nós jantaremos nesta noite.', categoryType: 'TIME' },
+{ word: 'night', translation: 'Noite', icon: '🌙', phonetic: 'naíte', example: 'I like to <strong>watch</strong> the stars at <strong>night</strong>.', examplePt: 'Eu gosto de observar as estrelas à noite.', categoryType: 'TIME' },
+{ word: 'yesterday', translation: 'Ontem', icon: '🔙', phonetic: 'iésterdêi', example: 'What did you <strong>do</strong> <strong>yesterday</strong>', examplePt: 'O que você fez ontem?', categoryType: 'TIME' },
+{ word: 'today', translation: 'Hoje', icon: '➡️', phonetic: 'tudêi', example: 'We are <strong>busy</strong> <strong>today</strong>.', examplePt: 'Nós estamos ocupados hoje.', categoryType: 'TIME' },
+{ word: 'tomorrow', translation: 'Amanhã', icon: '🔜', phonetic: 'tumórou', example: 'We <strong>leave</strong> <strong>tomorrow</strong> morning.', examplePt: 'Nós partimos amanhã de manhã.', categoryType: 'TIME' }
+                ]
+            },
+            religion: {
+                title: 'RELIGIÃO (RELIGION)',
+                description: 'Vocabulário sobre crenças e cultos',
+                words: [
+                    // CRENÇAS E CONCEITOS CENTRAIS
+{ word: 'God', translation: 'Deus', icon: '✨', phonetic: 'gád', example: 'Christians believe in <strong>one</strong> <strong>God</strong>.', examplePt: 'Os cristãos acreditam em um único Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'faith', translation: 'Fé', icon: '🕊️', phonetic: 'fêith', example: 'He has <strong>great</strong> <strong>faith</strong> in the future.', examplePt: 'Ele tem grande fé no futuro.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'belief', translation: 'Crença', icon: '💡', phonetic: 'bilíf', example: 'What are your <strong>core</strong> <strong>beliefs?</strong>', examplePt: 'Quais são as suas crenças centrais?', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'spirit', translation: 'Espírito', icon: '🌬️', phonetic: 'spírit', example: 'The <strong>body</strong> and the <strong>spirit</strong> are connected.', examplePt: 'O corpo e o espírito estão conectados.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'soul', translation: 'Alma', icon: '💫', phonetic: 'sôul', example: 'Many believe the <strong>soul</strong> is <strong>immortal</strong>.', examplePt: 'Muitos acreditam que a alma é imortal.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'heaven', translation: 'Céu (Paraíso)', icon: '☁️', phonetic: 'réven', example: 'They hope to <strong>go</strong> to <strong>heaven</strong>.', examplePt: 'Eles esperam ir para o céu.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'Jesus', translation: 'Jesus', icon: '✝️', phonetic: 'djíizâs', example: 'The <strong>story</strong> of <strong>Jesus</strong> is in the New Testament.', examplePt: 'A história de Jesus está no Novo Testamento.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'Holy Spirit', translation: 'Espírito Santo', icon: '🕊️', phonetic: 'rôuli spírit', example: 'The <strong>Father</strong>, the Son, and the <strong>Holy Spirit</strong>.', examplePt: 'O Pai, o Filho e o Espírito Santo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'hell', translation: 'Inferno', icon: '🔥', phonetic: 'rél', example: 'The <strong>sermon</strong> warned about <strong>hell</strong>.', examplePt: 'O sermão alertou sobre o inferno.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'sin', translation: 'Pecado', icon: '🚫', phonetic: 'sín', example: 'He <strong>confessed</strong> his <strong>sin</strong>.', examplePt: 'Ele confessou seu pecado.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'salvation', translation: 'Salvação', icon: '🛡️', phonetic: 'salvêichan', example: 'The <strong>path</strong> to <strong>salvation</strong> is often taught.', examplePt: 'O caminho para a salvação é frequentemente ensinado.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'forgiveness', translation: 'Perdão', icon: '🤝', phonetic: 'forguívness', example: 'She <strong>asked</strong> for <strong>forgiveness</strong>.', examplePt: 'Ela pediu perdão.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'redemption', translation: 'Redenção', icon: '🕊️', phonetic: 'ridêmpchan', example: 'The story is about <strong>personal</strong> <strong>redemption</strong>.', examplePt: 'A história é sobre redenção pessoal.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'miracle', translation: 'Milagre', icon: '✨', phonetic: 'míracle', example: 'The <strong>doctor</strong> called her recovery a <strong>miracle</strong>.', examplePt: 'O médico chamou sua recuperação de milagre.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'prophet', translation: 'Profeta', icon: '👤', phonetic: 'prófit', example: 'Moses is considered a <strong>major</strong> <strong>prophet</strong>.', examplePt: 'Moisés é considerado um grande profeta.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'afterlife', translation: 'Vida Após a Morte', icon: '⚰️', phonetic: 'éfterláif', example: 'Hindus believe in <strong>reincarnation</strong> in the <strong>afterlife</strong>.', examplePt: 'Os hindus acreditam em reencarnação na vida após a morte.', categoryType: 'RELIGION_AND_BELIEFS' },
+// PESSOAS E CARGOS
+{ word: 'priest', translation: 'Padre/Sacerdote', icon: '✝️', phonetic: 'príst', example: 'The <strong>priest</strong> <strong>performed</strong> the ceremony.', examplePt: 'O padre realizou a cerimônia.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'pastor', translation: 'Pastor', icon: '👨‍🦱', phonetic: 'péstor', example: 'The <strong>pastor</strong> gave a <strong>sermon</strong>.', examplePt: 'O pastor fez um sermão.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'rabbi', translation: 'Rabi', icon: '🕎', phonetic: 'rábai', example: 'The <strong>rabbi</strong> is a <strong>Jewish</strong> scholar.', examplePt: 'O rabi é um estudioso judeu.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'imam', translation: 'Imã', icon: '☪️', phonetic: 'imán', example: 'The <strong>imam</strong> <strong>leads</strong> the prayer in the mosque.', examplePt: 'O imã lidera a oração na mesquita.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'monk', translation: 'Monge', icon: '🧘', phonetic: 'mânke', example: 'The <strong>Buddhist</strong> <strong>monk</strong> lives simply.', examplePt: 'O monge budista vive de forma simples.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'nun', translation: 'Freira', icon: '🧕', phonetic: 'nãn', example: 'A <strong>nun</strong> dedicated her <strong>life</strong> to service.', examplePt: 'Uma freira dedicou sua vida ao serviço.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'saint', translation: 'Santo', icon: '😇', phonetic: 'sêint', example: 'They <strong>pray</strong> to their favorite <strong>saint</strong>.', examplePt: 'Eles oram para o seu santo favorito.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'pilgrim', translation: 'Peregrino', icon: '🚶', phonetic: 'pílgrim', example: '<strong>Thousands</strong> of <strong>pilgrims</strong> visited the site.', examplePt: 'Milhares de peregrinos visitaram o local.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'believer', translation: 'Crente/Fiel', icon: '🙌', phonetic: 'bilíver', example: 'He is a <strong>devout</strong> <strong>believer</strong>.', examplePt: 'Ele é um crente devoto.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'atheist', translation: 'Ateu', icon: '🤷', phonetic: 'êithiist', example: 'An <strong>atheist</strong> does not <strong>believe</strong> in God.', examplePt: 'Um ateu não acredita em Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'agnostic', translation: 'Agnóstico', icon: '🤔', phonetic: 'agnóstic', example: 'An <strong>agnostic</strong> <strong>doubts</strong> the existence of God.', examplePt: 'Um agnóstico duvida da existência de Deus.', categoryType: 'RELIGION_AND_BELIEFS' },
+// LOCAIS E TEXTOS SAGRADOS
+{ word: 'church', translation: 'Igreja', icon: '⛪', phonetic: 'tchêrtch', example: 'They <strong>go</strong> to <strong>church</strong> every Sunday.', examplePt: 'Eles vão à igreja todo domingo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'temple', translation: 'Templo', icon: '🕍', phonetic: 'têmpol', example: 'The <strong>Buddhist</strong> <strong>temple</strong> is very quiet.', examplePt: 'O templo budista é muito silencioso.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'mosque', translation: 'Mesquita', icon: '🕌', phonetic: 'mósk', example: 'Muslims <strong>pray</strong> at the <strong>mosque</strong>.', examplePt: 'Os muçulmanos oram na mesquita.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'synagogue', translation: 'Sinagoga', icon: '✡️', phonetic: 'sínagog', example: 'The <strong>synagogue</strong> is a place of <strong>Jewish</strong> worship.', examplePt: 'A sinagoga é um local de culto judeu.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'bible', translation: 'Bíblia', icon: '📖', phonetic: 'báibol', example: 'She <strong>reads</strong> the <strong>Bible</strong> every morning.', examplePt: 'Ela lê a Bíblia toda manhã.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'quran', translation: 'Alcorão', icon: '📜', phonetic: 'cuorán', example: 'The <strong>Quran</strong> is the <strong>holy</strong> book of Islam.', examplePt: 'O Alcorão é o livro sagrado do Islã.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'torah', translation: 'Torá', icon: '📜', phonetic: 'tóra', example: 'The <strong>Torah</strong> contains the <strong>laws</strong> of Judaism.', examplePt: 'A Torá contém as leis do Judaísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'altar', translation: 'Altar', icon: '🕯️', phonetic: 'óltar', example: 'Flowers were <strong>placed</strong> on the <strong>altar</strong>.', examplePt: 'Flores foram colocadas no altar.', categoryType: 'RELIGION_AND_BELIEFS' },
+// RITUAIS E AÇÕES
+{ word: 'prayer', translation: 'Oração', icon: '🙏', phonetic: 'préier', example: 'We said a <strong>silent</strong> <strong>prayer</strong> for him.', examplePt: 'Nós fizemos uma oração silenciosa por ele.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'worship', translation: 'Adoração/Culto', icon: '🛐', phonetic: 'uôrship', example: 'They gather for <strong>collective</strong> <strong>worship</strong>.', examplePt: 'Eles se reúnem para adoração coletiva.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'blessing', translation: 'Bênção', icon: '🙌', phonetic: 'bléssing', example: 'The <strong>blessing</strong> brought <strong>peace</strong>.', examplePt: 'A bênção trouxe paz.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'fasting', translation: 'Jejum', icon: '💧', phonetic: 'fésting', example: 'Many <strong>religions</strong> practice <strong>fasting</strong>.', examplePt: 'Muitas religiões praticam o jejum.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'meditation', translation: 'Meditação', icon: '🧘‍♀️', phonetic: 'meditêichan', example: 'She practices <strong>meditation</strong> <strong>daily</strong>.', examplePt: 'Ela pratica meditação diariamente.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'pilgrimage', translation: 'Peregrinação', icon: '🚶', phonetic: 'pilgrimidj', example: 'Making the <strong>pilgrimage</strong> to <strong>Mecca</strong> is required.', examplePt: 'Fazer a peregrinação a Meca é obrigatório.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'confession', translation: 'Confissão', icon: '🗣️', phonetic: 'conféchan', example: 'The <strong>act</strong> of <strong>confession</strong> is central to some faiths.', examplePt: 'O ato de confissão é central para algumas fés.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'baptism', translation: 'Batismo', icon: '💦', phonetic: 'báptizm', example: 'The <strong>baby\'s</strong> <strong>baptism</strong> was last month.', examplePt: 'O batismo do bebê foi no mês passado.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'communion', translation: 'Comunhão', icon: '🍷', phonetic: 'commúnion', example: 'They shared the <strong>body</strong> and blood during <strong>communion</strong>.', examplePt: 'Eles compartilharam o corpo e o sangue durante a comunhão.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'ritual', translation: 'Ritual', icon: '🕯️', phonetic: 'rítchual', example: 'The <strong>wedding</strong> involved many ancient <strong>rituals</strong>.', examplePt: 'O casamento envolveu muitos rituais antigos.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'sermon', translation: 'Sermão/Pregação', icon: '🗣️', phonetic: 'sêrmon', example: 'The <strong>sermon</strong> was about <strong>forgiveness</strong>.', examplePt: 'O sermão foi sobre perdão.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'prophecy', translation: 'Profecia', icon: '🔮', phonetic: 'prófesi', example: 'Ancient <strong>texts</strong> contain a famous <strong>prophecy</strong>.', examplePt: 'Textos antigos contêm uma famosa profecia.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'preach', translation: 'Pregar', icon: '🎤', phonetic: 'prítch', example: 'He was <strong>called</strong> to <strong>preach</strong> the gospel.', examplePt: 'Ele foi chamado para pregar o evangelho.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'chant', translation: 'Cântico/Cantar (ritual)', icon: '🎶', phonetic: 'tchént', example: 'The <strong>monks</strong> began to <strong>chant</strong>.', examplePt: 'Os monges começaram o cântico.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'convert', translation: 'Converter-se', icon: '🔄', phonetic: 'convêrt', example: 'She decided to <strong>convert</strong> to <strong>Islam</strong>.', examplePt: 'Ela decidiu converter-se ao Islã.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'oath', translation: 'Juramento', icon: '📜', phonetic: 'ôuth', example: 'He took an <strong>oath</strong> on the <strong>sacred</strong> book.', examplePt: 'Ele fez um juramento sobre o livro sagrado.', categoryType: 'RELIGION_AND_BELIEFS' },
+// TERMOS ESPECÍFICOS
+{ word: 'disciple', translation: 'Discípulo', icon: '🚶‍♂️', phonetic: 'disáipol', example: 'Jesus and his <strong>twelve</strong> <strong>disciples</strong>.', examplePt: 'Jesus e seus doze discípulos.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'angel', translation: 'Anjo', icon: '👼', phonetic: 'êindjel', example: 'The <strong>painting</strong> shows a beautiful <strong>angel</strong>.', examplePt: 'A pintura mostra um lindo anjo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'scripture', translation: 'Escritura Sagrada', icon: '📖', phonetic: 'scríptchur', example: 'We <strong>read</strong> from the <strong>scriptures</strong>.', examplePt: 'Nós lemos das escrituras sagradas.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'sacrament', translation: 'Sacramento', icon: '➕', phonetic: 'sácrament', example: 'Marriage is considered a <strong>holy</strong> <strong>sacrament</strong>.', examplePt: 'O casamento é considerado um sacramento sagrado.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'revelation', translation: 'Revelação', icon: '🌟', phonetic: 'revelêichan', example: 'He claimed to have received a <strong>divine</strong> <strong>revelation</strong>.', examplePt: 'Ele alegou ter recebido uma revelação divina.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'paradise', translation: 'Paraíso', icon: '🏝️', phonetic: 'páradais', example: 'They <strong>visualize</strong> <strong>paradise</strong> as a garden.', examplePt: 'Eles visualizam o paraíso como um jardim.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'monotheism', translation: 'Monoteísmo', icon: '1️⃣', phonetic: 'monothíizm', example: 'Judaism is a <strong>monotheism</strong> <strong>religion</strong>.', examplePt: 'O Judaísmo é uma religião de monoteísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'polytheism', translation: 'Politeísmo', icon: '🔟', phonetic: 'polithíizm', example: 'Hinduism is a <strong>form</strong> of <strong>polytheism</strong>.', examplePt: 'O Hinduísmo é uma forma de politeísmo.', categoryType: 'RELIGION_AND_BELIEFS' },
+{ word: 'secular', translation: 'Secular/Laico', icon: '🏢', phonetic: 'sékular', example: 'The <strong>government</strong> is officially <strong>secular</strong>.', examplePt: 'O governo é oficialmente secular.', categoryType: 'RELIGION_AND_BELIEFS' }
+                ]
+            },
+			
             essential_phrases: {
                 title: 'FRASES ESSENCIAIS (ESSENTIAL PHRASES)',
                 description: 'Saudações e Cumprimentos do dia a dia',
@@ -3659,86 +3599,183 @@ if (!isAlphabet) {
             }
         };
 
-        // Função auxiliar para esconder as listas de categorias
-        function hideCategoryLists() {
-            document.getElementById('grammaticalCategories').classList.add('hidden');
-            document.getElementById('specificCategories').classList.add('hidden');
-        }
+     // --- FUNÇÕES DE MEMÓRIA E NAVEGAÇÃO ---
 
-        // Função auxiliar para mostrar as listas de categorias
-        function showCategoryLists() {
-            document.getElementById('grammaticalCategories').classList.remove('hidden');
-            document.getElementById('specificCategories').classList.remove('hidden');
-        }
+// Função auxiliar para esconder as listas de categorias
+function hideCategoryLists() {
+    document.getElementById('grammaticalCategories').classList.add('hidden');
+    document.getElementById('specificCategories').classList.add('hidden');
+}
+
+// Função auxiliar para mostrar as listas de categorias
+function showCategoryLists() {
+    document.getElementById('grammaticalCategories').classList.remove('hidden');
+    document.getElementById('specificCategories').classList.remove('hidden');
+}
+
+// FUNÇÕES PARA EXIBIR AS CATEGORIAS
+// Exemplo de como deve ficar dentro da showCategory:
+
+function showCategory(categoryName) {
+    // Mantém sua função original de esconder
+    hideCategoryLists();
+    
+    const data = categoryData[categoryName];
+    if (data) {
+        // Mostra a seção de cards
+        document.getElementById('categorySection').classList.remove('hidden'); 
+        document.getElementById('categoryTitle').textContent = data.title;
+        document.getElementById('categoryDescription').textContent = data.description;
         
-        // FUNÇÕES PARA EXIBIR AS CATEGORIAS (Corrigidas)
-        function showCategory(categoryName) {
-            // 1. Oculta as listas de categorias
-            hideCategoryLists();
-            
-            const data = categoryData[categoryName];
-            if (data) {
-                document.getElementById('categoryTitle').textContent = data.title;
-                document.getElementById('categoryDescription').textContent = data.description;
-                generateCards(data.words, categoryName);
-				document.getElementById('backToCategoriesBtn').classList.remove('hidden');
-				
-				// === ADICIONE ESTAS DUAS LINHAS ABAIXO ===
-                document.getElementById('gameBtn').classList.remove('hidden'); // Mostra o botão de jogo
-                window.currentCategory = categoryName; // Guarda a categoria para o jogo saber o que carregar
-				window.isSpecific = false; // Indica que é das categorias gramaticais
-                // ========================================
+        generateCards(data.words, categoryName);
+        
+        // MOSTRA os botões (Voltar, Jogo, etc) e o Carrossel
+        const elements = ['backToCategoriesBtn', 'gameBtn', 'historyBtn', 'categoryNavigation'];
+        elements.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.remove('hidden');
+                if (id === 'categoryNavigation') el.style.display = 'flex';
             }
-        }
+        });
 
-        function showSpecificCategory(categoryName) {
-            // 1. Oculta as listas de categorias
-            hideCategoryLists();
-            
-            const data = specificCategoryData[categoryName];
-            if (data) {
-                document.getElementById('categoryTitle').textContent = data.title;
-                document.getElementById('categoryDescription').textContent = data.description;
-                generateCards(data.words, categoryName);
-				document.getElementById('backToCategoriesBtn').classList.remove('hidden');
-				
-				// === ADICIONE ESTAS DUAS LINHAS AQUI TAMBÉM ===
-        document.getElementById('gameBtn').classList.remove('hidden'); 
         window.currentCategory = categoryName; 
-        window.isSpecific = true; // Avisa o jogo: "Procure no banco das 25 diversas"
-        // =============================================
-            }
-        }
+        window.isSpecific = false; 
+        window.scrollTo(0, 0);
+    }
+}
+
+function showSpecificCategory(categoryName) {
+    // Mantém sua função original de esconder
+    hideCategoryLists();
+    
+    const data = specificCategoryData[categoryName];
+    if (data) {
+        document.getElementById('categorySection').classList.remove('hidden'); 
+        document.getElementById('categoryTitle').textContent = data.title;
+        document.getElementById('categoryDescription').textContent = data.description;
         
-        function hideCategory() {
-            // 1. Mostra as listas de categorias
-            showCategoryLists();
-            
-            // 2. Oculta a seção de detalhes
-            document.getElementById('categorySection').classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-			document.getElementById('backToCategoriesBtn').classList.add('hidden');
-			
-			// === ADICIONE ESTA LINHA ABAIXO ===
-    document.getElementById('gameBtn').classList.add('hidden'); 
-    // =================================
+        generateCards(data.words, categoryName);
+        
+        const elements = ['backToCategoriesBtn', 'gameBtn', 'historyBtn', 'categoryNavigation'];
+        elements.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.remove('hidden');
+                if (id === 'categoryNavigation') el.style.display = 'flex';
+            }
+        });
+
+        window.currentCategory = categoryName; 
+        window.isSpecific = true; 
+        window.scrollTo(0, 0);
+    }
+}
+
+function hideCategory() {
+    // 1. Para o áudio
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+    }
+
+    // 2. Chama a SUA função que você disse que funciona para mostrar as listas
+    showCategoryLists();
+    
+    // 3. Esconde a seção de cards e os botões
+    document.getElementById('categorySection').classList.add('hidden');
+    
+    const elements = ['backToCategoriesBtn', 'gameBtn', 'historyBtn', 'categoryNavigation'];
+    elements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.add('hidden');
+            if (id === 'categoryNavigation') el.style.display = 'none';
         }
-		
+    });
+
+    window.scrollTo(0, 0);
+}
+
+// --- LOGICA DE AUTO-RETORNO AO CARREGAR A PÁGINA ---
+window.addEventListener('DOMContentLoaded', () => {
+    // Trocamos local por session aqui para evitar o "pisco" ao reabrir o app
+    const saved = sessionStorage.getItem('lastVocabCategory');
+    const isSpecific = sessionStorage.getItem('isSpecific') === 'true';
+
+    if (saved) {
+        // Remove a classe hidden da seção principal de cards
+        const categorySection = document.getElementById('categorySection');
+        if (categorySection) categorySection.classList.remove('hidden');
+        
+        if (isSpecific) {
+            showSpecificCategory(saved);
+        } else {
+            showCategory(saved);
+        }
+    }
+});
+
+// --- FUNÇÕES DO JOGO (COPIE E SUBSTITUA AS DUAS ABAIXO) ---
+
 function abrirMenuJogo() {
-    // 1. Mostra a Modal (janela preta)
+    // 1. Mata o áudio dos cards antes de abrir o jogo
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
+
+    // 2. Reforço de segurança: para qualquer outro áudio na página
+    const audios = document.getElementsByTagName('audio');
+    for (let i = 0; i < audios.length; i++) {
+        audios[i].pause();
+        audios[i].currentTime = 0;
+    }
+
+    // 3. Sua lógica original de interface
     document.getElementById('gameModal').classList.remove('hidden');
-    // 2. Garante que a tela de níveis apareça primeiro
     document.getElementById('gameLevels').classList.remove('hidden');
-    // 3. Garante que o tabuleiro e a mensagem de vitória estejam escondidos
     document.getElementById('gameBoard').classList.add('hidden');
     document.getElementById('gameWinMessage').classList.add('hidden');
-    
-    // 4. Atualiza o título com o nome da categoria
     document.getElementById('gameModalTitle').textContent = "Desafio: " + window.currentCategory;
 }
 
 function fecharJogo() {
+    // Para o som ao sair para não voltar à biblioteca com barulho do jogo
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
+
     document.getElementById('gameModal').classList.add('hidden');
+    
+    // Mantém a limpeza da memória das cartas
+    if (typeof cartasViradas !== 'undefined') {
+        cartasViradas = [];
+    }
+}
+
+function voltarParaNiveis() {
+    const gameLevels = document.getElementById('gameLevels');
+    
+    // Se a tela de níveis JÁ ESTIVER visível (não tem a classe hidden)
+    // significa que o usuário quer sair do jogo de vez.
+    if (!gameLevels.classList.contains('hidden')) {
+        fecharJogo(); // Fecha o popup totalmente
+        return;
+    }
+
+    // Caso contrário, ele apenas limpa o jogo e volta para a seleção de níveis
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+    }
+
+    document.getElementById('gameBoard').classList.add('hidden');
+    document.getElementById('gameWinMessage').classList.add('hidden');
+    gameLevels.classList.remove('hidden'); // Mostra os botões Level 1, 2 e 3
+
+    if (typeof cartasViradas !== 'undefined') {
+        cartasViradas = [];
+    }
 }
 
 
@@ -3808,7 +3845,23 @@ function prepararTextoParaAudio(texto) {
         .toLowerCase();               // Tudo minúsculo
 }
 
+// --- FUNÇÕES DO JOGO (COPIE E SUBSTITUA AS DUAS ABAIXO) ---
+
 function abrirMenuJogo() {
+    // 1. Mata o áudio dos cards antes de abrir o jogo
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
+
+    // 2. Reforço de segurança: para qualquer outro áudio na página
+    const audios = document.getElementsByTagName('audio');
+    for (let i = 0; i < audios.length; i++) {
+        audios[i].pause();
+        audios[i].currentTime = 0;
+    }
+
+    // 3. Sua lógica original de interface
     document.getElementById('gameModal').classList.remove('hidden');
     document.getElementById('gameLevels').classList.remove('hidden');
     document.getElementById('gameBoard').classList.add('hidden');
@@ -3817,8 +3870,42 @@ function abrirMenuJogo() {
 }
 
 function fecharJogo() {
+    // Para o som IMEDIATAMENTE ao fechar no "X" ou no botão Sair
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+        window.currentVocabAudio = null; // Limpa a memória
+    }
+
     document.getElementById('gameModal').classList.add('hidden');
-    cartasViradas = [];
+    
+    if (typeof cartasViradas !== 'undefined') {
+        cartasViradas = [];
+    }
+}
+
+function voltarParaNiveis() {
+    const gameLevels = document.getElementById('gameLevels');
+    
+    // Se a tela de níveis JÁ ESTIVER visível (não tem a classe hidden)
+    // significa que o usuário quer sair do jogo de vez.
+    if (!gameLevels.classList.contains('hidden')) {
+        fecharJogo(); // Fecha o popup totalmente
+        return;
+    }
+
+    // Caso contrário, ele apenas limpa o jogo e volta para a seleção de níveis
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+    }
+
+    document.getElementById('gameBoard').classList.add('hidden');
+    document.getElementById('gameWinMessage').classList.add('hidden');
+    gameLevels.classList.remove('hidden'); // Mostra os botões Level 1, 2 e 3
+
+    if (typeof cartasViradas !== 'undefined') {
+        cartasViradas = [];
+    }
 }
 
 function iniciarJogo(nivel) {
@@ -3828,15 +3915,22 @@ function iniciarJogo(nivel) {
     window.totalParesJogo = (listaPalavras.length >= 30) ? 12 : 8;
     const selecionadas = [...listaPalavras].sort(() => 0.5 - Math.random()).slice(0, window.totalParesJogo);
     
-    // Configuração de cores Tom sobre Tom para a CAPA
-    let estiloCapa = "";
-    if (nivel === 1) {
-        estiloCapa = "bg-blue-50 border-blue-400 text-blue-600";
-    } else if (nivel === 2) {
-        estiloCapa = "bg-yellow-50 border-yellow-400 text-yellow-600";
-    } else {
-        estiloCapa = "bg-red-50 border-red-400 text-red-600";
-    }
+// Configuração de cores INVERTIDAS (Fundo forte, borda clara)
+let estiloCapa = "";
+
+if (nivel === 1) {
+    // Antes: bg-blue-50 border-blue-400
+    // Agora: Fundo azul médio, borda clarinha, texto branco para dar leitura
+    estiloCapa = "bg-blue-400 border-blue-50 text-white shadow-md";
+} else if (nivel === 2) {
+    // Antes: bg-yellow-50 border-yellow-400
+    // Agora: Fundo amarelo vibrante, borda clarinha, texto escuro para contraste
+    estiloCapa = "bg-yellow-400 border-yellow-50 text-yellow-900 shadow-md";
+} else {
+    // Antes: bg-red-50 border-red-400
+    // Agora: Fundo vermelho vivo, borda clarinha, texto branco
+    estiloCapa = "bg-red-400 border-red-50 text-white shadow-md";
+}
 
     let deck = [];
     selecionadas.forEach((item, index) => {
@@ -3890,10 +3984,16 @@ function virarCarta(elemento, id, audioPath) {
     if (!podeClicar || elemento.classList.contains('is-flipped') || elemento.classList.contains('matched')) return;
 
     if (audioPath) {
-        const audio = new Audio(audioPath);
-        // VELOCIDADE BEM LENTA: 0.9 (50% mais lento que o normal)
-        audio.playbackRate = 0.9; 
-        audio.play().catch(error => console.error("Erro áudio:", audioPath));
+        // --- NOVO: Mata o áudio anterior antes de tocar o novo ---
+        if (window.currentVocabAudio) {
+            window.currentVocabAudio.pause();
+            window.currentVocabAudio.currentTime = 0;
+        }
+
+        // Atribui à variável global para que o 'fecharJogo' consiga parar o som
+        window.currentVocabAudio = new Audio(audioPath);
+        window.currentVocabAudio.playbackRate = 0.9; 
+        window.currentVocabAudio.play().catch(error => console.error("Erro áudio:", audioPath));
     }
 
     elemento.classList.add('is-flipped');
@@ -3901,7 +4001,6 @@ function virarCarta(elemento, id, audioPath) {
 
     if (cartasViradas.length === 2) {
         podeClicar = false;
-        // Mantido 2 segundos para dar tempo de ouvir o áudio lento e ler
         setTimeout(verificarPar, 2000); 
     }
 }
@@ -3932,15 +4031,210 @@ function voltarNiveis() {
     document.getElementById('gameLevels').classList.remove('hidden');
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+    // Trocamos local por session aqui para evitar o "pisco" ao reabrir o app
+    const saved = sessionStorage.getItem('lastVocabCategory');
+    const isSpecific = sessionStorage.getItem('isSpecific') === 'true';
+
+    if (saved) {
+        // Remove a classe hidden da seção principal de cards
+        const categorySection = document.getElementById('categorySection');
+        if (categorySection) categorySection.classList.remove('hidden');
+        
+        if (isSpecific) {
+            showSpecificCategory(saved);
+        } else {
+            showCategory(saved);
+        }
+    }
+});
+
+// --- LÓGICA DE NAVEGAÇÃO E INTERFACE ---
+
+// 1. Função para subir ao topo suavemente
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 2. Controle de visibilidade do botão "Voltar ao Topo"
+window.addEventListener('scroll', function() {
+    const btnTopo = document.getElementById("backToTopBtn");
+    
+    // O botão aparece após rolar 300px para baixo
+    if (window.pageYOffset > 300) {
+        btnTopo.style.display = "flex";
+    } else {
+        btnTopo.style.display = "none";
+    }
+});
+
+
+
+// =================================================================
+// MOTOR DO POMODORO (VERSÃO FINAL BLINDADA)
+// =================================================================
+var timer = null; // Use var para garantir escopo global no NW.js
+var isRunning = false;
+var isFocus = true;
+var timeLeft = 25 * 60; 
+
+function formatTime(seconds) {
+    const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const sec = String(seconds % 60).padStart(2, '0');
+    return min + ":" + sec;
+}
+
+function updateDisplay() {
+    const timeDisplay = document.getElementById('pomodoro-time');
+    const title = document.getElementById('pomodoro-title');
+    const status = document.getElementById('pomodoro-status');
+    const startPauseBtn = document.getElementById('start-pause-btn');
+
+    if (!timeDisplay) {
+        console.warn("Elemento 'pomodoro-time' não encontrado.");
+        return;
+    }
+
+    const currentFormatted = formatTime(timeLeft);
+    timeDisplay.textContent = currentFormatted;
+    
+    if (isFocus) {
+        if (title) title.textContent = "Foco (" + currentFormatted + ")";
+        if (status) status.textContent = isRunning ? "Foco em andamento... 🧠" : "Pronto para estudar!";
+        if (startPauseBtn) startPauseBtn.innerHTML = isRunning ? "⏸️ Pausar" : "▶️ Iniciar Foco";
+    } else {
+        if (title) title.textContent = "Pausa (" + currentFormatted + ")";
+        if (status) status.textContent = isRunning ? "Pausa em andamento... ☕" : "Aproveite o descanso!";
+        if (startPauseBtn) startPauseBtn.innerHTML = isRunning ? "⏸️ Pausar" : "▶️ Iniciar Pausa";
+    }
+}
+
+function startPausePomodoro() {
+    if (isRunning) {
+        clearInterval(timer);
+        isRunning = false;
+    } else {
+        isRunning = true;
+        timer = setInterval(function() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateDisplay();
+            } else {
+                clearInterval(timer);
+                isRunning = false;
+                alert(isFocus ? "Foco terminado! ☕" : "Pausa terminada! 🧠");
+                if (isFocus) { setShortBreak(true); } else { setFocusTime(true); }
+            }
+        }, 1000);
+    }
+    updateDisplay();
+}
+
+function setFocusTime(start) {
+    isFocus = true;
+    timeLeft = 25 * 60;
+    clearInterval(timer);
+    isRunning = false;
+    updateDisplay();
+    if (start) startPausePomodoro();
+}
+
+function setShortBreak(start) {
+    isFocus = false;
+    timeLeft = 5 * 60;
+    clearInterval(timer);
+    isRunning = false;
+    updateDisplay();
+    if (start) startPausePomodoro();
+}
+
+function resetPomodoro() {
+    clearInterval(timer);
+    isRunning = false;
+    isFocus = true;
+    timeLeft = 25 * 60;
+    updateDisplay();
+}
+
+function togglePomodoroUI() {
+    const container = document.getElementById('pomodoro-container');
+    const toggleBtn = document.getElementById('pomodoro-toggle-btn');
+    
+    if (!container) {
+        alert("Erro técnico: O container do Pomodoro não foi encontrado no HTML.");
+        return;
+    }
+
+    if (container.classList.contains('hidden')) {
+        container.classList.remove('hidden');
+        if (toggleBtn) toggleBtn.classList.add('hidden');
+        updateDisplay();
+    } else {
+        container.classList.add('hidden');
+        if (toggleBtn) toggleBtn.classList.remove('hidden');
+    }
+}
+
+// Inicialização imediata
+resetPomodoro();
+// =================================================================
+
+// =================================================================
+// NAVEGAÇÃO ENTRE CATEGORIAS (UNIFICADA - CARROSSEL REAL)
+// =================================================================
+function navigateCategory(direction) {
+    // 1. Cria a lista unificada de chaves
+    const allGrammarKeys = Object.keys(categoryData || {});
+    const allSpecificKeys = Object.keys(specificCategoryData || {});
+    const allCategories = [...allGrammarKeys, ...allSpecificKeys];
+    
+    if (allCategories.length === 0) return;
+
+    // 2. Acha a posição da categoria atual
+    let currentIndex = allCategories.indexOf(window.currentCategory);
+    
+    // Se não achar (erro de undefined), reseta para a primeira
+    if (currentIndex === -1) currentIndex = 0;
+
+    // 3. Calcula o próximo índice
+    if (direction === 'next') {
+        currentIndex = (currentIndex + 1) % allCategories.length;
+    } else {
+        currentIndex = (currentIndex - 1 + allCategories.length) % allCategories.length;
+    }
+
+    const nextCategory = allCategories[currentIndex];
+
+    // 4. Mata o áudio antes de mudar (evita bug de sobreposição no Android)
+    if (window.currentVocabAudio) {
+        window.currentVocabAudio.pause();
+        window.currentVocabAudio.currentTime = 0;
+    }
+
+    // 5. Verifica em qual banco de dados a próxima categoria está
+    // Importante: usamos .hasOwnProperty para ser ultra rápido no celular
+    if (categoryData && categoryData.hasOwnProperty(nextCategory)) {
+        showCategory(nextCategory);
+    } else if (specificCategoryData && specificCategoryData.hasOwnProperty(nextCategory)) {
+        showSpecificCategory(nextCategory);
+    }
+    
+    // Rola para o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
     </script>
 	
 <div id="gameModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-90 overflow-y-auto">
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden relative">
         
         <div class="gradient-bg p-4 flex justify-between items-center text-white">
-            <h3 id="gameModalTitle" class="text-xl font-bold">Desafio de Memória</h3>
-            <button onclick="fecharJogo()" class="text-white hover:text-red-200 text-2xl font-bold">&times;</button>
-        </div>
+    <h3 id="gameModalTitle" class="text-xl font-bold">Desafio de Memória</h3>
+    <button onclick="voltarParaNiveis()" class="text-white hover:text-red-200 text-2xl font-bold">&times;</button>
+</div>
 
         <div id="gameLevels" class="p-8 text-center">
             <p class="text-gray-600 mb-6">Escolha o nível de dificuldade para praticar:</p>
@@ -3967,12 +4261,21 @@ function voltarNiveis() {
             </div>
 
         <div id="gameWinMessage" class="hidden p-8 text-center">
-            <h2 class="text-3xl font-bold text-green-600 mb-4">Parabéns! 🎉</h2>
-            <p class="text-gray-700 mb-6">Você dominou esta categoria!</p>
-            <button onclick="voltarNiveis()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold">Jogar Novamente</button>
-        </div>
+    <h2 class="text-3xl font-bold text-green-600 mb-2">Parabéns! 🎉</h2>
+    <p class="text-gray-600 mb-6 text-sm">Você dominou esta categoria!</p>
+    
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button onclick="voltarParaNiveis()" 
+            class="bg-gradient-to-r from-blue-700 to-cyan-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:brightness-110 transition-all">
+            Outro Nível
+        </button>
+
+        <button onclick="fecharJogo()" 
+            class="bg-gradient-to-r from-red-700 to-black text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-md hover:brightness-110 transition-all">
+            Sair do Jogo
+        </button>
     </div>
-</div>	
+</div>
 	
 </body>
 </html>
