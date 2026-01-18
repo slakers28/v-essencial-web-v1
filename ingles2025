@@ -5,28 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vocabulário Essencial em Inglês</title>
 	
-	<script>
-        const SENHA_CORRETA = "ingles2025"; // Altera aqui a tua senha quando quiseres
-
-        function verificarAcesso() {
-            const senhaInserida = localStorage.getItem('acesso_smartapp');
-
-            if (senhaInserida !== SENHA_CORRETA) {
-                const tentativa = prompt("Bem-vindo! Por favor, insira a sua chave de acesso:");
-                
-                if (tentativa === SENHA_CORRETA) {
-                    localStorage.setItem('acesso_smartapp', tentativa);
-                } else {
-                    alert("Chave incorreta!");
-                    document.documentElement.innerHTML = "<html><body style='background:#091a3f; color:white; text-align:center; padding-top:100px; font-family:sans-serif;'><h1>Acesso Negado</h1><p>Solicite a sua chave no WhatsApp.</p></body></html>";
-                    throw new Error("Acesso Negado");
-                }
-            }
-        }
-        verificarAcesso();
-    </script>
-	
-    <script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
     <style>
 	
 	{
@@ -4279,4 +4258,5 @@ function navigateCategory(direction) {
 	
 </body>
 </html>
+
 
